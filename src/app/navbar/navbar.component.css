@@ -1,0 +1,143 @@
+
+header h3
+{
+    position: relative;
+    padding: 10px;
+    color: white;
+}
+
+header h3::before
+{
+    content: "";
+    width: 3px;
+    height: 30px;
+    background-color: #FF4C29 ;
+    position: absolute;
+    left: 0;
+}
+nav {
+    display: inline;
+}
+
+.head
+{
+    background-color: transparent;
+    border-bottom: 0.5px solid gray;
+}
+
+.nav-link {
+    font-size: 19px;
+    font-weight: 600;
+    margin-left: 10px;
+    display: inline;
+    color: white;
+    position: relative;
+    transition: all 0.8s;
+}
+
+.activebutton {
+    border-top: 3px solid #FF4C29;
+    border-left: 3px solid #FF4C29;
+    border-radius: 4px;
+
+    color: #fff;
+    
+}
+
+
+
+.nav-link::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: -1px;
+    height: 2.5px;
+    width: 100%;
+    background-color: #FF4C29 ;
+    transform: scale(0);
+    transform-origin: right;
+    transition: transform 0.5s linear;
+}
+
+.nav-link:hover:before {
+    transform: scale(1);
+    transform-origin: left;
+}
+
+
+
+header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FF4C29;
+    padding: 15px 100px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    z-index: 999;
+}
+
+.fas {
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+    display: none;
+}
+
+@media (max-width:768px) {
+    header {
+        padding: 20px 12px;
+    }
+    .logo-image {
+        
+        width: 90px;
+        height: 40px;   
+    }
+    .fas {
+        display: block;
+
+    }
+    nav a {
+        margin: 20px;
+        padding: 20px;
+        display: block;
+        border: 2px solid rgba(0, 0, 0, .1);
+        border-left: 4px solid #0D7377;
+    }
+    #menu{
+        position: absolute;
+        overflow: hidden;
+        top: 100%;
+        left: 500px;
+        right: 0;
+        background: rgba(0, 0, 0, .8);
+        border-top: 2px solid rgba(0, 0, 0, .1);
+    }
+    .nav-link::before {
+        bottom: -2px;
+    }
+    .dropdown-menu
+    {
+        top: 50%;
+        right: 0% !important;
+        
+    }
+}
+.dropdown-toggle
+{
+    position: relative !important;
+}
+
+.dropdown-menu
+{
+    background-color: #2C394B;
+    position: absolute !important;
+    left: 100px;
+}
+
+
+
