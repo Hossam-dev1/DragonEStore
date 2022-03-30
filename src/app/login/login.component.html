@@ -1,0 +1,37 @@
+<section class="form_header">
+    <div class="container">
+        <div class="layer"></div>
+        <h2>Get In Touch</h2>
+        <p>Want to get in touch? We’d love to hear from you. Here’s how you can reach us…</p>
+    </div>
+</section>
+
+<section class="form_container">
+    <div class="container">
+        <div class="form_items">
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+            <h2>Login Now! <i class="fas fa-user-check "></i></h2>
+            <h3 class="text-center mb-4">Already Have an Acount? <a class="link-secondary" routerLink="/register">Register</a></h3>
+
+            <div  *ngIf="errorMessage" class="alert alert-danger">
+                <p class="alert">{{errorMessage}}</p>
+            </div>
+            
+            <label class="form-label"  for="email">Email or Phone</label>
+            <input [ngClass]="{'border-danger': loginForm.controls['phone_email'].errors &&  loginForm.controls['phone_email'].touched}" formControlName="phone_email" class="form-control" id="phone_email" placeholder="Email or Phone" type="text">
+            <div *ngIf="loginForm.controls['phone_email'].errors &&  loginForm.controls['phone_email'].touched" class="alert alert-danger" role="alert">
+                <p *ngIf="loginForm.controls['phone_email'].errors?.required">Email or Phone field is required</p>
+            </div>
+
+            <label class="form-label" for="password">Password</label>
+            <input  [ngClass]="{'border-danger': loginForm.controls['password'].errors &&  loginForm.controls['password'].touched}" formControlName="password" class="form-control  " id="password" placeholder="password" type="password">
+            <div *ngIf="loginForm.controls['password'].errors &&  loginForm.controls['password'].touched" class="alert alert-danger" role="alert">
+                <p *ngIf="loginForm.controls['password'].errors?.required">Password field is required</p>
+            </div>
+
+            <button class="btn btn-dark" [disabled]="loginForm.invalid" type="submit">Login</button>
+        </form>
+        </div>
+
+    </div>
+</section>

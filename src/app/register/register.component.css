@@ -1,0 +1,251 @@
+
+
+html {
+    height: 100%
+}
+
+p {
+    color: grey
+}
+
+#heading {
+    text-transform: uppercase;
+    color: #282828;
+    font-weight: normal
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+#msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+
+.form-card {
+    text-align: left;
+}
+
+#msform fieldset:not(:first-of-type) {
+    display: none
+}
+
+#msform .form-control,
+#msform textarea {
+    padding: 8px 15px 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    /* margin-top: 10px; */
+    width: 100%;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    background-color: #ECEFF6;
+    font-size: 16px;
+    letter-spacing: 1px;
+    border-radius: 5px;
+}
+
+#msform .form-control:focus,
+#msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none;
+    border: 1px solid #282828;
+    background-color: transparent;
+
+    outline-width: 0
+}
+
+#msform .action-button {
+    width: 100px;
+    background: #282828;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 0px 10px 5px;
+    float: right
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+    background-color: #282828
+}
+
+#msform .action-button-previous {
+    width: 100px;
+    background: #282828;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px 10px 0px;
+    float: right
+}
+
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+    background-color: #000000
+}
+
+.card {
+    z-index: 0;
+    border: none;
+    position: relative;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    padding: 40px;
+
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #282828;
+    margin-bottom: 15px;
+    font-weight: normal;
+    text-align: left
+}
+
+.purple-text {
+    color: #282828;
+    font-weight: normal
+}
+
+.steps {
+    font-size: 25px;
+    color: gray;
+    margin-bottom: 10px;
+    font-weight: normal;
+    text-align: right
+}
+.alert p
+{
+    /* padding-top: 10px; */
+    padding-left: 10px;
+}
+
+.fieldlabels {
+    color: gray;
+    text-align: left;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+#progressbar .active {
+    color: #282828
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 33.333%;
+    float: left;
+    position: relative;
+    font-weight: 400
+}
+
+#progressbar #account:before {
+    font-family: FontAwesome;
+    content: "\f13e"
+}
+
+#progressbar #personal:before {
+    font-family: FontAwesome;
+    content: "\f007"
+}
+
+#progressbar #payment:before {
+    font-family: FontAwesome;
+    content: "\f030"
+}
+
+#progressbar #confirm:before {
+    font-family: FontAwesome;
+    content: "\f00c"
+}
+
+#progressbar li:before {
+    width: 50px;
+    height: 50px;
+    line-height: 45px;
+    display: block;
+    font-size: 20px;
+    color: #ffffff;
+    background: lightgray;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    padding: 2px
+}
+
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: lightgray;
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    z-index: -1
+}
+#confirm:after
+{
+    width: 0 !important; 
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #282828
+}
+
+.progress {
+    height: 20px
+}
+
+.progress-bar {
+    background-color: #282828
+}
+
+.fit-image {
+    width: 100%;
+    object-fit: cover
+}
+
+.form-check
+{
+    margin-left: 10px;
+}
+
+.form-card img
+{
+    width: 100px !important;
+    height: 100px !important;
+}
+.form-card .finish_previous
+{
+    margin: 8px 0 0 0;
+    float: none !important;
+}
+.action-button-previous 
+{
+    float: left !important;
+}

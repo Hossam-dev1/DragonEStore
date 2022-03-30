@@ -1,0 +1,7 @@
+{
+    "/api": {
+    "target": "https://api.dragonestore.tk",
+    "secure": false,
+    "logLevel": "debug"
+    }
+    }

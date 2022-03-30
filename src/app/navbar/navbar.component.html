@@ -1,15 +1,45 @@
 <header class="head ">
+    <img src="assets/logo3.png" alt="">
 
-    <h3><span>Hossam</span> Ashraf</h3>
 
     <nav id="menu" class="navbar navbar-expand-lg  ">
         <a class="nav-link "  routerLink="/home" routerLinkActive="activebutton" >Home</a>
-        <!-- <a class="nav-link" routerLink="/" routerLinkActive="router-link-active">About</a> -->
-        <a class="nav-link"  routerLink="/skills" routerLinkActive="activebutton" > Skills </a> 
-        <a class="nav-link" routerLink="/portofolio" routerLinkActive="activebutton" >Portofolio</a>
+        <a class="nav-link" routerLink="/" routerLinkActive="router-link-active">About</a>
+        <a class="nav-link"  routerLink="/shop" routerLinkActive="activebutton" >Shop </a> 
+        <a class="nav-link" routerLink="/profile" routerLinkActive="activebutton" >Portofolio</a>
         <a class="nav-link" href="#contact">Contact</a>
     </nav>
 
+
+
+        <div class="info">
+            <a class="auth" *ngIf="!isLogin"  routerLink="/login" >Login </a>
+                <a class="profile" *ngIf="isLogin">
+                    <img (click)="profile_Dropdwon()" id="img" src="../../assets/profile.png" alt="">
+                </a>
+
+            
+
+            <div *ngIf="isLogin" class="action">
+
+                <div id="profile_menu" class="menu">
+                    <ul>
+                    <h3>{{ userName }}</h3>
+                    <hr>
+                        <li routerLink="/profile" ><i class="fa-solid fa-circle-user"></i> My Profile</li>
+                        <hr>
+                        <li><i class="fa-solid fa-pen-to-square"></i> Edit Profile</li>
+                        <hr>
+                        <li><a class="auth" *ngIf="isLogin"  (click)="logout()" ><i class="fa-solid fa-right-from-bracket"></i> Logout </a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="cart_menu" class="icon">
+                <i  class="fa-solid fa-bag-shopping "></i>
+                <span> $00.0</span>
+            </div>
+        </div>
         <i id="menu-bar" class="fas fa-bars "></i>
 
 

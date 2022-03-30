@@ -5,5 +5,532 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s linear;
+}
+.container
+{
+    padding: 0 60px;
+}
+hr
+{
+    margin: 0;
+}
+a
+{
+    text-decoration: none;
+    cursor: pointer;
+}
+.alert
+{
+    padding: 15px 0 2px 15px;
+    /* padding-left: 10px; */
+    margin: 0;
+}
+.home
+{
+    background-image: url(assets/home.jpg);
+    background-size: cover;
+    background-position: 100%;
+    height: 99vh;
+    position: relative;
+    /* z-index: -1; */
+}
+.sideBar
+{
+    background-color: white;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+#close-bar
+{
+    font-size: 35px;
+    margin: 20px;
+    cursor: pointer;
+    color: #666;
+    
+}
+.sideBar_lightbox
+{
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    display: none;
+}
+.home_layer
+{
+    position: absolute;
+    height: 99vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.home .container
+{
+    /* background-color: tomato; */
+    position: absolute;
+    top: 30%;
+    left: 10%;
+}
+.home_head h1
+{
+    /* background-image: linear-gradient(#999, white); */
+    font-size: 45px;
+    font-weight: 600;
+    padding: 8px 0 30px 0;
+}
+.home_desc p
+{
+    /* background-color: tan; */
+    width: 85%;
+    line-height: 1.6;
+    font-size: 16px;
+}
+.home_btns
+{
+    padding: 40px 0;
+}
+.home_btns .fa-solid 
+{
+    padding-left: 15px;
+}
+.home_btns a
+{
+    margin-right: 40px;
+}
+.home_btns button:hover
+{
+    background-color: white;
+    color: #222;
+}
+.home_btns button
+{
+    padding: 15px;
+    font-weight: 500;
+    border-color: #888;
+    color: white;
+}
+.home_btns .btn-outline-white
+{
+    background-color: white;
+    color: #222;
+    transition: all 0.4s linear;
+}
+.home_btns .btn-outline-white:hover
+{
+    transform: scale(1.05);
+}
+
+
+/* featuresssssssssssssssssssssssssss */
+.features
+{
+    text-align: center;
+    padding:60px;
+}
+.features .content
+{
+    border-left: #999 solid 1px;
+    padding-left: 20px;
+}
+.features .content img
+{
+    height: 60px;
+    margin-bottom: 20px;
+}
+.features .content:hover .feature_img
+{
+    transform: scale(1.1);
+}
+
+
+
+/* saleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee */
+
+.sale
+{
+    padding: 60px 0;
+}
+.sale .box 
+{
+    position: relative;
+    background-color: #666;
+    padding: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+}
+
+.sale .content_img
+{
+    overflow: hidden;
+}
+.sale  img
+{
+    width: 100%;
+    height: 350px;
+    transition: all 0.6s ease-in-out;
+}
+.sale .box:hover .box_img
+{
+    transform: scale(1.2);
+}
+
+.sale .box_content
+{
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sale .box_content:hover  .img_head
+{
+    transform: translateY(-15px);
+}
+.sale .box_content h1
+{
+    font-size: 30px;
+    font-weight: 600;
+}
+.sale  button
+{
+    padding: 11px;
+    border: #888 solid 1.6px;
+    color: white;
+}
+.sale  button:hover
+{
+    background-color: white;
+    color: #222;
+    border: white solid 1.6px;
+}
+
+
+/* productsssssssssssssssssssssssssssss */
+
+.products
+{
+    padding: 30px 0;
+}
+.products h1
+{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.products h1::before
+{
+    content: "";
+    background-color: #222;
+    width: 30px;
+    height: 20px;
+    color: tomato;
+}
+.products .productBox
+{
+    margin-bottom: 30px;
+}
+.products img
+{
+    border-radius: 5px;
+}
+.products .product_img
+{
+    position: relative;
+    overflow: hidden;
+
+}
+.products .product_img:hover .product_img_layer
+{
+    top: 0;
+}
+.products .product_img_layer
+{
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.6s ease-out;
+
+}
+.products .product_img_layer i
+{
+    font-size: 28px;
+    cursor: pointer;
+}
+.products  .fa-magnifying-glass:hover 
+{
+    transform: rotate(90deg);
+}
+.products .productBox p
+{
+    font-size: .85em;
+    margin-top: 0.5em ;
+    margin-bottom: 0;
+    display: block;
+    line-height: 1.3;
+    opacity: .6;
+}
+.products .productBox h2
+{
+    margin-bottom: 2px;
+    padding: 0;
+    font-weight: 600;
+}
+.products .productBox h4
+{
+    font-weight: 600;
+    margin-top: 2px;
+    opacity: 0.9;
+}
+.products .productBox .btn 
+{
+    width: 100%;
+    padding: 10px;
+}
+
+/* posterrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr */
+
+.poster
+{
+    background-image: url(assets/hero1.jpg);
+    background-position: 15% 0%;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 50vh;
+    width: 100%;
+    text-align: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin:20px 0;
+}
+.poster h2
+{
+    font-size: 30px;
+    font-weight: 600;
+}
+.poster p
+{
+    padding: 5px 0 40px 0;
+}
+.poster form
+{
+    width: 50%;
+    margin: auto;
+}
+.poster form button
+{
+    width: 100%;
+    margin-top: 10px;
+    background-color: #111;
+}
+
+
+/* newsssssssssssssssssssssssssssss */
+.news
+{
+    margin: 40px 0;
+}
+.news h1
+{
+    text-align: center;
+    margin: 50px 0;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.news .new_box
+{
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    border-radius: 5px;
+}
+.news .new_box:hover
+{
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 14px 28px, rgba(0, 0, 0, 0.15) 0px 10px 10px;
+}
+.news .new_box img
+{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+}
+.news .new_box:hover .new_img
+{
+    opacity: 0.85;
+}
+.news .new_content
+{
+    padding: 30px;
+}
+.news .new_content h2
+{
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #555;
+}
+.news .new_content p
+{
+    color: #777;
+    font-weight: 500;
+}
+
+
+
+
+/* shoppppppppppppppppppppppppp */
+
+.shop_header
+{
+    background-color: black;
+    height: 40vh;
+    width: 100%;
+    margin-top: 80px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.shop_header h2
+{
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.shop_header h1
+{
+    font-size: 80px;
+    font-weight: 600;
+    margin: 25px 0;
+    letter-spacing: 4px;
+}
+.shop_header .stars
+{
+    background-image: url(assets/sparkle1.png);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+/* shopContainerrrrrrrrrrrrrrrrr */
+.shop_container
+{
+    margin: 60px 0;
+}
+.shop_container .search_input 
+{
+    display: flex;
+    margin-bottom: 30px;
+}
+input[type='range']::-webkit-slider-thumb {
+
+    background: #333;
+  }
+.viewed .item img
+{
+    height: 80px;
+}
+.viewed h5
+{
+    margin-top: -10px;
+}
+.viewed hr
+{
+    margin: 0 auto;
+    width: 70%;
+}
+
+/* loginnnnnnnnnnnnnnnnnnnnnn */
+.form_header
+{
+    background-image: url(assets/contact.jpg);
+    /* background-size: cover; */
+    background-position: 100% -100%;
+    background-repeat: repeat-x;
+    height: 55vh;
+    width: 100%;
+    opacity: 0.86;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+.form_header h2
+{
+    margin-top: 50px;
+    font-size: 45px;
+    font-weight: 600;
+}
+.form_header p
+{
+    font-weight: 500;
+    color: whitesmoke;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.form_container form
+{
+    width: 40%;
+    margin:50px auto;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    border-radius: 10px;
+    padding: 40px 60px;
+    
+}
+
+.form_container form h2
+{
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.form_container input
+{
+    margin-bottom: 15px;
+}
+.form_container input:focus , .form_container select:focus 
+{
+    border: 1px solid #888;
+    box-shadow:rgba(0, 0, 0, 0.34) 0px 3px 8px;
+}
+.form_container  button
+{
+    width: 100%;
+    margin-top: 30px;
+    box-shadow: rgba(0, 0, 0, 0.34) 0px 3px 8px;
+}
+
+#toast-container > div {
+    opacity:1;
 }
