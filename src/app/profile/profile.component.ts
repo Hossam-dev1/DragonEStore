@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { AuthService } from './../auth_service/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 
@@ -20,14 +20,27 @@ export class ProfileComponent implements OnInit {
   passwordSuccess:boolean = false;
   profileSuccess:boolean = false;
 
-  user:any
-  userName:any 
-  constructor(private _AuthService:AuthService, private _Router:Router) {
-
-    this.user =JSON.parse(localStorage.getItem('userData')!) ;
-    this.userName = this.user.full_name;
-
-   }
+  userData:any
+  userName:any
+  constructor(private _AuthService:AuthService, private _Router:Router) 
+  {
+    this._AuthService.currentUserData.subscribe(()=>
+    {      
+    if (this._AuthService.currentUserData.getValue()) 
+      {
+        if (localStorage.getItem('updatedData')) // updated profile data
+        {
+          this.userData = this._AuthService.currentUserData.getValue();        
+          this.userName = this.userData.full_name;
+          return;
+        }
+        this.userData = this._AuthService.currentUserData.getValue().user;                
+        this.userName = this.userData.full_name;
+        console.log(this.userData.avatar);
+        
+      }
+    })
+  }
 
   passwordForm:FormGroup = new FormGroup({
     password:new FormControl(null, [Validators.required, Validators.pattern("^[a-zA-Z0-9]{3,10}$")]),
@@ -108,7 +121,7 @@ export class ProfileComponent implements OnInit {
       if (response.message) 
       {
         this.userName = response.data.full_name;
-        localStorage.setItem('userData', JSON.stringify(response.data));
+        localStorage.setItem('updatedData', JSON.stringify(response.data));
         this.profileErrors = [];
         this.profileSuccess = true
       }
@@ -145,9 +158,9 @@ export class ProfileComponent implements OnInit {
       $('#password-tab').removeClass('active bg-secondary text-white')
     })
 
-    // $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
-    //   $("#success-alert").slideUp(500);
-    // });
+    $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+      $("#success-alert").slideUp(500);
+    });
 
     window.setTimeout(function() {
       $("#success-alert").fadeTo(500, 0).slideUp(1000,function()

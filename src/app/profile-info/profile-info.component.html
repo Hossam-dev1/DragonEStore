@@ -1,0 +1,92 @@
+<section class="py-5 my-5">
+    <div class="container">
+        <h1 class="my-4 text-center fw-bold">Account Profile</h1>
+        <div class="bg-white shadow rounded-lg d-block d-sm-flex">
+            <div class="profile-tab-nav border-right">
+                <div class="p-4">
+                    <div class="img-circle text-center mb-3">
+                        <img [src]="userData.avatar" alt="Image"  class="shadow img-circle">
+                    </div>
+                    <h4 class="text-center">{{userData.full_name}}</h4>
+                    <!-- <h4 class="text-center">{{userData.img}}</h4> -->
+                </div>
+                <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active bg-secondary text-white" id="account-tab" data-toggle="pill"  role="tab" aria-controls="account" aria-selected="true">
+                        <i class="fa fa-home text-center mr-1"></i> 
+                        Account
+                    </a>
+
+
+                </div>
+            </div>
+            <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+                <div class="tab-pane fade show active " id="account">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input  type="text" class="form-control" disabled [value]="userData.full_name">
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="text" class="form-control" disabled [value]="userData.email" >
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="text" class="form-control" disabled [value]="userData.phone">
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Country</label>
+                                <input type="text" class="form-control" disabled [value]="userData.country">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">City</label>
+                                <input type="text" class="form-control" disabled [value]="userData.city">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Address</label>
+                                <input type="text" class="form-control" disabled [value]="userData.address">
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Postal code</label>
+                                <input type="text" class="form-control" disabled [value]="userData.postal_code">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label">Role</label>
+                                <input type="text" class="form-control" disabled [value]="userData.role"  >
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                
+            
+            </div>
+        </div>
+    </div>
+</section>

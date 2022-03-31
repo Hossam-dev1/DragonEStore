@@ -19,13 +19,11 @@ export class AuthService {
     if(localStorage.getItem('currentUser'))
     {
       this.saveUserData();
-      if (localStorage.getItem('userData')) 
+      if (localStorage.getItem('updatedData')) 
       {
-        
-        let userData = localStorage.getItem('userData');
+        let userData = localStorage.getItem('updatedData');
         this.currentUserData.next(JSON.parse(userData!))
         console.log(this.currentUserData.getValue());
-
       }  
     }
     

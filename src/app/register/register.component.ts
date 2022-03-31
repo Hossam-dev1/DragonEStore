@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators , FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth_service/auth.service';
+import { AuthService } from '../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 declare let $:any;
 

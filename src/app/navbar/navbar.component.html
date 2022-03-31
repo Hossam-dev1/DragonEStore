@@ -6,7 +6,7 @@
         <a class="nav-link "  routerLink="/home" routerLinkActive="activebutton" >Home</a>
         <a class="nav-link" routerLink="/" routerLinkActive="router-link-active">About</a>
         <a class="nav-link"  routerLink="/shop" routerLinkActive="activebutton" >Shop </a> 
-        <a class="nav-link" routerLink="/profile" routerLinkActive="activebutton" >Portofolio</a>
+        <!-- <a class="nav-link" routerLink="/profile" routerLinkActive="activebutton" >Portofolio</a> -->
         <a class="nav-link" href="#contact">Contact</a>
     </nav>
 
@@ -14,21 +14,18 @@
 
         <div class="info">
             <a class="auth" *ngIf="!isLogin"  routerLink="/login" >Login </a>
+
                 <a class="profile" *ngIf="isLogin">
-                    <img (click)="profile_Dropdwon()" id="img" src="../../assets/profile.png" alt="">
+                    <img (click)="profile_Dropdwon()" id="user_img" [src]="userData.avatar" alt="">
                 </a>
-
-            
-
             <div *ngIf="isLogin" class="action">
-
                 <div id="profile_menu" class="menu">
                     <ul>
                     <h3>{{ userName }}</h3>
                     <hr>
-                        <li routerLink="/profile" ><i class="fa-solid fa-circle-user"></i> My Profile</li>
+                        <li routerLink="/profile-info" ><i class="fa-solid fa-circle-user"></i> My Profile</li>
                         <hr>
-                        <li><i class="fa-solid fa-pen-to-square"></i> Edit Profile</li>
+                        <li routerLink="/profile"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</li>
                         <hr>
                         <li><a class="auth" *ngIf="isLogin"  (click)="logout()" ><i class="fa-solid fa-right-from-bracket"></i> Logout </a></li>
                     </ul>

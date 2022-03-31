@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth_service/auth.service';
+import { AuthService } from '../services/auth.service';
 
 declare let $:any;
 
@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     if (this._AuthService.currentUserData.getValue()) 
       {
         this.isLogin = true; 
-        if (localStorage.getItem('userData')) 
+        if (localStorage.getItem('updatedData')) // updated profile data
         {
           this.userData = this._AuthService.currentUserData.getValue();        
           this.userName = this.userData.full_name;
@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
 
   logout()
   {
-    localStorage.removeItem('currentUser');
+    localStorage.clear();
     this._AuthService.currentUserData.next(null)
     
     this.isLogin = false;

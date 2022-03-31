@@ -16,6 +16,7 @@ import { ShopComponent } from './shop/shop.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ProfileInfoComponent } from './profile-info/profile-info.component';
 
 
 
@@ -31,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
+    ProfileInfoComponent,
   ],
   imports: [  
     BrowserModule,

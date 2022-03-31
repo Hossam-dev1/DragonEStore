@@ -5,9 +5,10 @@
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
                     <div class="img-circle text-center mb-3">
-                        <img src="../../assets/profile.png" alt="Image" class="shadow">
+                        <img [src]="userData.avatar" alt="Image"  class="shadow img-circle">
                     </div>
                     <h4 class="text-center">{{userName}}</h4>
+                    <!-- <h4 class="text-center">{{userData.img}}</h4> -->
                 </div>
                 <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active bg-secondary text-white" id="account-tab" data-toggle="pill"  role="tab" aria-controls="account" aria-selected="true">
