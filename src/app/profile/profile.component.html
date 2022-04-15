@@ -5,9 +5,9 @@
             <div class="profile-tab-nav border-right">
                 <div class="p-4">
                     <div class="img-circle text-center mb-3">
-                        <img [src]="userData.avatar" alt="Image"  class="shadow img-circle">
+                        <img [src]="userData?.avatar" alt="Image"  class="shadow img-circle">
                     </div>
-                    <h4 class="text-center">{{userName}}</h4>
+                    <h4 class="text-center">{{userData?.full_name}}</h4>
                     <!-- <h4 class="text-center">{{userData.img}}</h4> -->
                 </div>
                 <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -38,13 +38,14 @@
                         <p>You Have Updated The Profile Successfully</p>
                     </div>
 
+
                     <h3 class="mb-4">Account Settings</h3>
                     <form [formGroup]="profileForm" (ngSubmit)="profileSubmit(profileForm)" >
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                   <label class="form-label">Full Name</label>
-                                  <input formControlName="full_name" type="text" class="form-control">
+                                  <input formControlName="full_name" type="text" class="form-control" [(ngModel)]="userName">
                                 <div *ngIf="profileForm.controls['full_name'].errors &&  profileForm.controls['full_name'].touched" class="alert alert-danger mt-1" role="alert">
                                     <p *ngIf="profileForm.controls['full_name'].errors?.required">Full Name field is required</p>
                                 </div>
@@ -62,7 +63,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label class="form-label">Country</label>
-                                  <input formControlName="country" type="text" class="form-control" >
+                                  <input formControlName="country" type="text" class="form-control" [(ngModel)]="userData.country" >
                                   <div *ngIf="profileForm.controls['country'].errors &&  profileForm.controls['country'].touched" class="alert alert-danger mt-1" role="alert">
                                     <p *ngIf="profileForm.controls['country'].errors?.required">Country field is required</p>
                                 </div>
@@ -71,7 +72,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label class="form-label">City</label>
-                                  <input formControlName="city" type="text" class="form-control">
+                                  <input formControlName="city" type="text" class="form-control" [(ngModel)]="userData.city">
                                   <div *ngIf="profileForm.controls['city'].errors &&  profileForm.controls['city'].touched" class="alert alert-danger mt-1" role="alert">
                                     <p *ngIf="profileForm.controls['city'].errors?.required">City field is required</p>
                                 </div>
@@ -80,7 +81,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label class="form-label">Address</label>
-                                  <input formControlName="address" type="text" class="form-control" >
+                                  <input formControlName="address" type="text" class="form-control" [(ngModel)]="userData.address" >
                                   <div *ngIf="profileForm.controls['address'].errors &&  profileForm.controls['address'].touched" class="alert alert-danger mt-1" role="alert">
                                     <p *ngIf="profileForm.controls['address'].errors?.required">Address field is required</p>
                                 </div>
@@ -89,7 +90,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                   <label class="form-label">Postal_code</label>
-                                  <input formControlName="postal_code" type="text" class="form-control">
+                                  <input formControlName="postal_code" type="text" class="form-control" [(ngModel)]="userData.postal_code">
                                   <div *ngIf="profileForm.controls['postal_code'].errors &&  profileForm.controls['postal_code'].touched" class="alert alert-danger mt-1" role="alert">
                                     <p *ngIf="profileForm.controls['postal_code'].errors?.required">Postal code field is required</p>
                                     <p *ngIf="profileForm.controls['postal_code'].errors.minlength"> required code number is 5 </p>

@@ -20,15 +20,11 @@ export class RegisterComponent implements OnInit {
   isError:boolean = false;
   
 
-  constructor(private _AuthService:AuthService, private _Router:Router,private formBuilder: FormBuilder, private toast: ToastrService) 
+  constructor(private _AuthService:AuthService, private _Router:Router,private formBuilder: FormBuilder, private toastr: ToastrService) 
   {
-  }
-
-  hello()
-  {
-    this.toast.success('Hello world!', 'Toastr fun!');
 
   }
+
 
   registerForm:FormGroup = this.formBuilder.group({
 
@@ -82,6 +78,7 @@ export class RegisterComponent implements OnInit {
       {
         this.displayErrors = [];
         this.isError = false;
+        this.toastr.info('Registeration Successfully', 'Login Now !');
         this._Router.navigate(['/login']);
         // this.user_token = response.access_token;
       }

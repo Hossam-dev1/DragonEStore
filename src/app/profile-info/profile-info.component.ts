@@ -13,16 +13,13 @@ export class ProfileInfoComponent implements OnInit {
   constructor(private _AuthService:AuthService) 
   {
     this._AuthService.currentUserData.subscribe((data:any)=>
-    {
+    {      
       if(data.user)
       {
-        this.userData = data.user
-        console.log(this.userData);
-        
+        this.userData = data.user;
+        return;
       }
-      
-      
-      
+      this.userData  = data
     })
   }
 

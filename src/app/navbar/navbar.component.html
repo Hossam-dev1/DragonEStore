@@ -1,4 +1,4 @@
-<header class="head ">
+<header *ngIf="dashboard" class="head ">
     <img src="assets/logo3.png" alt="">
 
 
@@ -21,11 +21,12 @@
             <div *ngIf="isLogin" class="action">
                 <div id="profile_menu" class="menu">
                     <ul>
-                    <h3>{{ userName }}</h3>
+                    <h3 class="text-center">{{ userName }}</h3>
                     <hr>
                         <li routerLink="/profile-info" ><i class="fa-solid fa-circle-user"></i> My Profile</li>
-                        <hr>
+                        
                         <li routerLink="/profile"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</li>
+                        <li routerLink="/dashboard"><i class="fa-solid fa-user-gear"></i> Dashboard</li>
                         <hr>
                         <li><a class="auth" *ngIf="isLogin"  (click)="logout()" ><i class="fa-solid fa-right-from-bracket"></i> Logout </a></li>
                     </ul>

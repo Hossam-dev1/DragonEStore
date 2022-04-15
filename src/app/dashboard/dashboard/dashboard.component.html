@@ -1,0 +1,455 @@
+<section class="dash">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-1">
+          <div class="sideBar">
+            <h2><i class="fa-solid fa-globe"></i> Dashboard</h2>
+            <ul>
+              <li id="category_tab"><i class="fa-solid fa-indent"></i> Categories</li>
+              <li id="product_tab"><i class="fa-solid fa-mobile-screen-button"></i> Products</li>
+              <li id="approval_tab"><i class="fa-solid fa-clock-rotate-left"></i> Approval</li>
+            </ul>
+          </div>
+          
+        </div>
+        <!-- Categories Container -->
+        <div id="categories" class="col-md-11">
+          <h1 class="text-center fw-bold">Categories</h1>
+          <button class="btn btn-lg btn-primary" (click)="open(content)">Add New <i class="fa-solid fa-plus"></i></button>
+          <div *ngIf="productMessage" id="success-alert" class="alert alert-success" role="alert">
+            <p>{{productMessage}} </p>
+          </div>
+          <table class="table table-striped table-hover">
+                  <thead   class="table-dark">
+                  <tr >
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Image</th>
+                      <th>Active</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody *ngFor="let item of catsData">
+                  <tr>    
+                      <td>{{item.id}}</td>
+                      <td>{{item.name}} </td>
+                      <td><img [src]="item.image" alt=""></td>
+                      <td *ngIf="item.deleted == false"><i class="fa-solid fa-circle-check text-success"></i></td>
+                      <td *ngIf="item.deleted == true"><i class="fa-solid fa-circle-xmark text-danger"></i></td>
+  
+                      <td>
+                        <button (click)="editCat(item.id, edit_cat)" type="button" class="btn btn-outline-primary mx-2"
+                        ><i class="fas fa-edit"></i>
+                        </button>
+
+                        <button (click)="deleteCat(item.id)" type="button" class="btn btn-outline-danger mx-2"
+                        ><i class="fas fa-trash-can"></i>
+                        </button>
+                      </td>
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+
+            <!-- Add Modellllllllllll -->
+    <ng-template #content let-modal>
+      
+      <div class="modal-header">
+
+        <h2 class="modal-title" id="modal-basic-title">New Category</h2>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="catForm" (ngSubmit)="createCat(catForm)">
+          <div class="mb-3">
+            <div class="form-group">
+              <label class="form-label">Category Name</label>
+              <input formControlName="name" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="mb-3">
+              <div class="form-group">
+                <label class="form-label">Category Image </label>
+                <input (change)="getFile($event)"  type="file" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+            </div>
+        </form>
+      </div>
+    </ng-template>
+    
+    <!-- Editttttttt Modellllllllllllllllll -->
+    <ng-template #edit_cat let-modal>
+    
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-basic-title">Edit Category</h2>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updatedForm" (ngSubmit)="updateCat(updatedForm)">
+          <div class="mb-3">
+            <div class="form-group">
+              <label class="form-label">Category Name</label>
+              <input formControlName="name" type="text" class="form-control" >
+            </div>
+          </div>
+
+          <div class="mb-3">
+              <div class="form-group">
+                <label class="form-label">Category Image </label>
+                <input (change)="getUpdatedFile($event)"  type="file" class="form-control">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+            </div>
+        </form>
+      </div>
+    </ng-template>
+
+        <!-- Productsss Container -->
+        <div id="products" class="col-md-11 d-none">
+          <h1 class="text-center fw-bold">Products</h1>
+          <button class="btn btn-lg btn-primary" (click)="open(products)">Add New <i class="fa-solid fa-plus"></i></button>
+          <div *ngIf="message" id="success-alert" class="alert alert-success" role="alert">
+            <p>{{message}} </p>
+          </div>
+          <table class="table table-striped table-hover">
+                  <thead   class="table-dark">
+                  <tr >
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Category Name</th>
+                      <th>Seller Name</th>
+                      <th>Price</th>
+                      <th>Product_Cover</th>
+                      <th>approval_status</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody *ngFor="let item of productsData">
+                  <tr>    
+                      <td>{{item.id}}</td>
+                      <td>{{item.name}} </td>
+                      <td>{{item.category.name}} </td>
+                      <td>{{item.seller.full_name}} </td>
+                      <td>{{item.price}}$ </td>
+                      <td><img [src]="item.cover_image.path" alt=""></td>
+                      <td *ngIf="item.approval_status == 'approved' "><i class="fa-solid fa-circle-check text-success"></i></td>
+                      <td *ngIf="item.approval_status == 'pending' "><i class="fa-solid fa-circle-xmark text-danger"></i></td>
+  
+                      <td>
+                        <button (click)="editProduct(item.id, edit_product)" type="button" class="btn btn-outline-primary mx-2"
+                        ><i class="fas fa-edit"></i>
+                        </button>
+  
+                        <button (click)="showProduct(item.id, show_product)" type="button" class="btn btn-outline-success mx-2"
+                        ><i class="fas fa-solid fa-eye"></i>
+                        </button>
+    
+                        <button (click)="deleteProduct(item.id)" type="button" class="btn btn-outline-danger mx-2"
+                        ><i class="fas fa-trash-can"></i>
+                        </button>
+                      </td>
+
+  
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+
+
+        <!-- Approval Productssss -->
+
+        <div id="approval" class="col-md-11 d-none">
+          <h1 class="text-center fw-bold">Approval Products</h1>
+          <!-- <button class="btn btn-lg btn-primary" (click)="open(products)">Add New <i class="fa-solid fa-plus"></i></button> -->
+          <div *ngIf="statusMessage" id="success-alert" class="alert alert-success" role="alert">
+            <p>{{statusMessage}} </p>
+          </div>
+          <table class="table table-striped table-hover">
+                  <thead   class="table-dark">
+                  <tr >
+                      <th>ID</th>
+                      <th>Product Name</th>
+                      <th>Category Name</th>
+                      <th>Seller Name</th>
+                      <th>Price</th>
+                      <th>Product_Cover</th>
+                      <th>approval_status</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody *ngFor="let item of unAppProducts">
+                  <tr>    
+                      <td>{{item.id}}</td>
+                      <td>{{item.name}} </td>
+                      <td>{{item.category.name}} </td>
+                      <td>{{item.seller.full_name}} </td>
+                      <td>{{item.price}}$ </td>
+                      <td><img [src]="item.cover_image.path" alt=""></td>
+                      <td *ngIf="item.approval_status == 'pending' "><i class="fa-solid fa-spinner text-primary fa-spin-pulse fa-spin-reverse"></i></td>
+                      <td *ngIf="item.approval_status == 'approved' "><i class="fa-solid fa-circle-check  text-success"></i></td>
+                      <td *ngIf="item.approval_status == 'canceled' "><i class="fa-solid fa-circle-xmark text-danger"></i></td>
+
+                      <td>
+                        <button [disabled]="item.approval_status == 'approved' "  (click)="changeProStatus('approved', item.id)" type="button" class="btn  btn-outline-success mx-2 "
+                        ><i class="fa-solid fa-lock-open"></i>
+                        </button>
+
+                        <button [disabled]="item.approval_status == 'canceled' " (click)="changeProStatus('canceled', item.id)" type="button" class="btn  btn-outline-danger mx-2 "
+                        ><i class="fa-solid fa-comment-slash"></i>
+                        </button>
+                      </td>
+
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+
+
+    </div>
+
+          <!-- Add Products Modellllllllllll -->
+    <ng-template #products let-modal>
+      
+      <div class="modal-header">
+
+        <h2 class="modal-title" id="modal-basic-title">New Product</h2>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productsForm" (ngSubmit)="createProduct(productsForm)">
+          <div class="mb-3">
+            <div class="form-group">
+              <label class="form-label">Product Name</label>
+              <input formControlName="name" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label class="form-label">description</label>
+              <input formControlName="description" type="text" class="form-control">
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="form-group">
+              <label class="form-label">Category Name</label>
+              <select  formControlName="category_id" class="form-select form-select-md" >              
+                <option *ngFor="let item of catsData"  [value]="item.id">{{item.name}} </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">price</label>
+                  <input formControlName="price" type="number" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">discount</label>
+                  <input formControlName="discount" type="number" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Quantity</label>
+                <input formControlName="stock" type="number" class="form-control">
+              </div>
+            </div>
+            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="form-label">Product cover_image </label>
+                <input (change)="getProFile($event)"  type="file" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Product Images </label>
+              <input (change)="getAllProFiles($event)"  type="file" class="form-control" multiple required>
+            </div>
+
+          </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+            </div>
+        </form>
+      </div>
+    </ng-template>
+
+        <!-- show productttttttttt modellllllll -->
+
+        <ng-template #show_product let-modal>
+      
+          <div class="modal-header">
+    
+            <h2 class="modal-title" id="modal-basic-title">New Product</h2>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">Product Name</label>
+                  <input  type="text" class="form-control" readonly [value]="currentProduct.name">
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" readonly [value]="currentProduct.description"></textarea>
+                  <!-- <input  type="text"  > -->
+                </div>
+              </div>
+    
+    
+              <div class="row">
+    
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">Price</label>
+                      <input  type="number" class="form-control" readonly [value]="currentProduct.price" >
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Final Price</label>
+                    <input  type="number" class="form-control" readonly [value]="currentProduct.final_price">
+                  </div>
+                </div>
+    
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-label">Discount</label>
+                      <input  type="number" class="form-control" readonly [value]="currentProduct.discount">
+                    </div>
+                </div>
+    
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input  type="number" class="form-control" readonly [value]="currentProduct.stock">
+                  </div>
+                </div>
+    
+                <div class="form-group mt-3">
+                  <label class="form-label">Product Images </label>
+                  <div class="Products_imgs">
+                    <!-- <div  class="col-md-2"> -->
+                        <img *ngFor="let img of currentProduct.images" class="" [src]="img.path" alt="">
+
+                    <!-- </div> -->
+                  </div>
+                </div>
+    
+              </div>
+    
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark" (click)="modal.dismiss('Cross click')">Close</button>
+                </div>
+          </div>
+        </ng-template>
+
+        <!-- Edit Productsssssss Modellllllll -->
+        <ng-template #edit_product let-modal>
+      
+          <div class="modal-header">
+    
+            <h2 class="modal-title" id="modal-basic-title">Edit Product</h2>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="productsForm" (ngSubmit)="updateProduct(productsForm)" >
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">Product Name</label>
+                  <input formControlName="name" type="text" class="form-control" >
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">Description</label>
+                  <textarea formControlName="description" style="height: 90px;" class="form-control" ></textarea>
+                </div>
+              </div>
+    
+              <div class="mb-3">
+                <div class="form-group">
+                  <label class="form-label">Category Name</label>
+                  <select  formControlName="category_id" class="form-select form-select-md" >              
+                    <option *ngFor="let item of catsData"  [value]="item.id">{{item.name}} </option>
+                  </select>
+                </div>
+              </div>
+    
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Price</label>
+                      <input formControlName="price" type="number" class="form-control"> 
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Discount</label>
+                      <input formControlName="discount" type="number" class="form-control" >
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Quantity</label>
+                    <input formControlName="stock" type="number" class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-label">Product cover_image </label>
+                    <input (change)="getProFile($event)"  type="file" class="form-control" required>
+                  </div>
+                </div>
+    
+
+    
+              </div>
+    
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                </div>
+            </form>
+          </div>
+        </ng-template>
+    
+
+</section>
+
+

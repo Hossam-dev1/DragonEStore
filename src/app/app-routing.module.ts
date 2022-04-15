@@ -1,3 +1,5 @@
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+
 import { ProfileGuard } from './profile.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
@@ -17,6 +19,9 @@ const routes: Routes = [
   {path:'login' , canActivate:[AuthGuard], component:LoginComponent},
   {path:'profile' , canActivate:[ProfileGuard], component:ProfileComponent},
   {path:'profile-info' ,  canActivate:[ProfileGuard], component:ProfileInfoComponent},
+  {path:'dashboard' ,  canActivate:[ProfileGuard], component:DashboardComponent},
+
+  
 
 ];
 

@@ -1,4 +1,4 @@
-<footer>
+<footer *ngIf="dashboard">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -14,37 +14,27 @@
                     <h4>Latest News</h4>
                     <hr class="brd">
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img class="img-fluid" src="assets/head.jpg" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Camo Headphones 5000</h3>
-                            <h5>$300.00</h5>
-                        </div>
-                    </div>
-                    <hr class="main_brdr">
-                    
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img class="img-fluid" src="assets/product 6.jpg" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Camo Headphones 5000</h3>
-                            <h5>$300.00</h5>
-                        </div>
-                    </div>
-                    <hr class="main_brdr">
+                    <div class="viewed my-3">
+                            <div class="item d-flex">
+                                <img class="img-fluid" src="assets/mobile.jpg" alt="">
+                                <div class="item_details mt-3">
+                                    <h6>Mobile Samsounq A53 </h6>
+                                    <h6>$300.00</h6>
+                                </div>
+                            </div>
+                            <hr class="main_brdr">
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img class="img-fluid" src="assets/mobile.jpg" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Camo Headphones 5000</h3>
-                            <h5>$300.00</h5>
-                        </div>
-                    </div>
+                                <div class="item d-flex">
+                                    <img class="img-fluid" src="assets/mobile.jpg" alt="">
+                                    <div class="item_details mt-3">
+                                        <h6>Mobile Samsounq A53 </h6>
+                                        <h6>$300.00</h6>
+                                    </div>
+                                </div>
+                                <hr class="main_brdr">
+                            </div>
+                    
+
                     <!-- <hr class="main_brdr"> -->
                 </div>
             </div>
@@ -54,26 +44,25 @@
                     <h4>Our Products</h4>
                     <hr class="brd">
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img class="img-fluid" src="assets/head.jpg" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <h3>Camo Headphones 5000</h3>
-                            <h5>$300.00</h5>
-                        </div>
-                    </div>
-                    <hr class="main_brdr">
-
-                    <div class="row">
-                        <div class="col-md-3">
+                    <div class="viewed my-3">
+                        <div class="item d-flex">
                             <img class="img-fluid" src="assets/mobile.jpg" alt="">
+                            <div class="item_details mt-3">
+                                <h6>Mobile Samsounq A53 </h6>
+                                <h6>$300.00</h6>
+                            </div>
                         </div>
-                        <div class="col-md-9">
-                            <h3>Camo Headphones 5000</h3>
-                            <h5>$300.00</h5>
+                        <hr class="main_brdr">
+
+                            <div class="item d-flex">
+                                <img class="img-fluid" src="assets/mobile.jpg" alt="">
+                                <div class="item_details mt-3">
+                                    <h6>Mobile Samsounq A53 </h6>
+                                    <h6>$300.00</h6>
+                                </div>
+                            </div>
+                            <hr class="main_brdr">
                         </div>
-                    </div>
                     <!-- <hr class="main_brdr"> -->
                 </div>
             </div>
@@ -97,7 +86,7 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="footer_text">
-                        <h4 class="">© All rights reserved</h4>
+                        <h6 class="">© All rights reserved</h6>
                     </div>
                 </div>
                 <div class="col-md-3">

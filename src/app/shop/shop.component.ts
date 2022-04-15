@@ -1,4 +1,8 @@
+import { ProductsService } from './../services/products.service';
 import { Component, OnInit } from '@angular/core';
+
+
+
 declare let $:any;
 
 @Component({
@@ -8,7 +12,15 @@ declare let $:any;
 })
 export class ShopComponent implements OnInit {
 
-  constructor() { }
+  catsData:any;
+  constructor(private _ProductsService:ProductsService) 
+  {
+    _ProductsService.getAllCat().subscribe((resp)=>
+    {
+      this.catsData = resp.data;
+      
+    })
+   }
 
   ngOnInit(): void {
 

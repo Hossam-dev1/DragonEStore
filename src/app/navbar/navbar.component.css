@@ -159,6 +159,7 @@ header {
     padding-bottom: 0;
     border-radius: 10px;
     opacity: 0;
+    display: none;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
 }
@@ -187,8 +188,8 @@ header {
 }
 .info .action ul li
 {
-    padding: 10px;
     list-style: none;
+    padding: 10px;
     color: #222;
     font-weight: 500;
     font-size: 15px;
@@ -199,7 +200,10 @@ header {
 .info .action ul li:hover .fa-solid
 {
     color: black;
-    
+}
+.info hr
+{
+    margin: 0 !important;
 }
 .info .action ul li i
 {
@@ -209,7 +213,3 @@ header {
     
 }
 
-#user_img
-{
-
-}

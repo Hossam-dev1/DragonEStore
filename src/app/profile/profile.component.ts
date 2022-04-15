@@ -24,21 +24,21 @@ export class ProfileComponent implements OnInit {
   userName:any
   constructor(private _AuthService:AuthService, private _Router:Router) 
   {
-    this._AuthService.currentUserData.subscribe(()=>
+    this._AuthService.currentUserData.subscribe((currentData:any)=>
     {      
-    if (this._AuthService.currentUserData.getValue()) 
+    if (currentData) 
       {
         if (localStorage.getItem('updatedData')) // updated profile data
-        {
-          this.userData = this._AuthService.currentUserData.getValue();        
+        {          
+          this.userData = currentData;        
           this.userName = this.userData.full_name;
           return;
         }
-        this.userData = this._AuthService.currentUserData.getValue().user;                
-        this.userName = this.userData.full_name;
-        console.log(this.userData.avatar);
-        
+        this.userData = currentData.user;                
+        this.userName = this.userData.full_name;        
       }
+      console.log(this.userData);
+      
     })
   }
 
@@ -96,7 +96,7 @@ export class ProfileComponent implements OnInit {
     {      
       this.fileImg = event.target.files[0];
       this.profileForm.patchValue({avatar:this.fileImg});
-      console.log(this.profileForm);
+      // console.log(this.profileForm);
       
     }
   }
@@ -121,6 +121,7 @@ export class ProfileComponent implements OnInit {
       if (response.message) 
       {
         this.userName = response.data.full_name;
+        this.userData = response.data;
         localStorage.setItem('updatedData', JSON.stringify(response.data));
         this.profileErrors = [];
         this.profileSuccess = true

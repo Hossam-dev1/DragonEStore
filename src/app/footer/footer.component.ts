@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  dashboard:boolean = true;
   constructor() { }
 
   ngOnInit(): void {

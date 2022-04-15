@@ -27,7 +27,6 @@ footer .footer_item h4
     width: 10%;
     height: 3px !important;
     margin-bottom: 25px;
-    margin-top: -10px;
     /* padding-bottom: 10px; */
 }
 .footer_item .main_brdr
@@ -37,7 +36,10 @@ footer .footer_item h4
 }
 .footer_item img
 {
-    height: 90%;
+   width: 60px;
+   height: 60px;
+   object-fit: cover;
+   margin-right: 10px;
 }
 .footer_item h5,h3
 {
@@ -52,7 +54,7 @@ footer .footer_item h4
     width: 100%;
     color: #666;
 }
-.footer_bottom h4
+.footer_bottom h6
 {
     margin-top: 10px;
 }

@@ -5,7 +5,53 @@
     <h2>EXTRA 20% OFF SALE</h2>
 </section>
 
+
+<nav class="bg-dark shop_nav">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="category_bar">
+                    <span>Categoires </span>
+                    <i class="fa-solid fa-bars"></i>
+                    <div class="cat_list">
+                        <ul *ngFor="let cat of catsData">
+                            <li>{{cat.name}} </li>  
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+                <div class="col-md-9">
+                    <div class="menu_list">
+                        <ul>
+                            <li>Home</li>
+                            <div class="brands">
+                                <li class="brands_menu">All Brands <i class=" m-2 fa-solid fa-caret-down"></i></li>
+                                <div class="brand_list">
+                                    <ul>
+                                        <li>Mobile </li>  
+                                        <li>Tv</li>
+                                        <li>Labtobs</li>
+                                        <li>HeadPhones</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <li>Discount Products</li>
+                            <li>All Sellers</li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+        
+    </div>
+</nav>
+
+
+
 <section class="shop_container products">
+    
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -28,13 +74,13 @@
                       </form>
                     </div>
 
-                    <div class="viewed">
-                        <h2>RECENTLY VIEWED PRODUCTS</h2>
+                    <div class="viewed my-3">
+                        <h5>RECENTLY VIEWED PRODUCTS</h5>
                             <div class="item d-flex">
                                 <img class="img-fluid" src="assets/mobile.jpg" alt="">
                                 <div class="item_details mt-3">
-                                    <h4>Mobile Samsounq A53 </h4>
-                                    <h5>$300.00</h5>
+                                    <h6>Mobile Samsounq A53 </h6>
+                                    <h6>$300.00</h6>
                                 </div>
                             </div>
                                 <hr>
@@ -42,15 +88,15 @@
                                 <div class="item d-flex">
                                     <img class="img-fluid" src="assets/mobile.jpg" alt="">
                                     <div class="item_details mt-3">
-                                        <h4>Mobile Samsounq A53 </h4>
-                                        <h5>$300.00</h5>
+                                        <h6>Mobile Samsounq A53 </h6>
+                                        <h6>$300.00</h6>
                                     </div>
                                 </div>
                                 <hr>
                     </div>
 
                     <div class="video">
-                        <h2 class="my-3">SEE OUR PRODUCT</h2>
+                        <h5 class="my-3">SEE OUR PRODUCT</h5>
                         <video src=""></video>
                     </div>
 
@@ -65,7 +111,7 @@
                                     <img class="img-fluid" src="assets/product 5.jpg" alt="">
                                 </div>
                                 <p class="type">Mpbile Phone</p>
-                                <h2 class="name">I Phone 6</h2>
+                                <h3 class="name">I Phone 6</h3>
                                 <div class="stars">
                                     <i class="fa-solid fa-star"></i>
                                     <i class="fa-solid fa-star"></i>
@@ -99,4 +145,8 @@
             </div>
         </div>
     </div>
+</section>
+
+<section>
+
 </section>

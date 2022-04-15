@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -16,7 +17,10 @@ export class LoginComponent implements OnInit {
   user_token:string = '';
 
 
-  constructor(private _AuthService:AuthService, private _Router:Router) { }
+  constructor(private _AuthService:AuthService, private _Router:Router, private _ToastrService:ToastrService) { 
+
+
+  }
 
   loginForm:FormGroup = new FormGroup({
 
@@ -33,9 +37,9 @@ export class LoginComponent implements OnInit {
         {
           localStorage.setItem('currentUser', response.access_token);
           this._AuthService.saveUserData();
-
+          let userNmae = this._AuthService.currentUserData.getValue()?.user.full_name;
+          this._ToastrService.success('Login Successfully', `Welcome ${userNmae}` );
           this._Router.navigate(['/home']);
-          
         }
         
       },

@@ -219,7 +219,7 @@
                             </div>
 
                             <label class="form-label fieldlabels " for="Profile">Profile Image</label>
-                            <input (change)="getFile($event)"  [ngClass]="{'border-danger': registerForm.controls['avatar'].errors &&  registerForm.controls['avatar'].touched}"  class="form-control" id="Profile"  placeholder="postal_code" type="file">
+                            <input (change)="getFile($event)"   [ngClass]="{'border-danger': registerForm.controls['avatar'].errors &&  registerForm.controls['avatar'].touched}"  class="form-control" id="Profile"  placeholder="postal_code" type="file">
                             <div *ngIf="registerForm.controls['avatar'].errors &&   registerForm.controls['avatar'].touched" class="alert alert-danger" role="alert">
                                 <p *ngIf="registerForm.controls['avatar'].errors?.required">Profile Image field is required</p>
                             </div>

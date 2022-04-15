@@ -16,21 +16,24 @@ export class NavbarComponent implements OnInit {
   userData:any = {};
   userName:string = '';
 
+  dashboard:boolean = true;
+
   constructor(private _AuthService:AuthService, public _Router:Router)
   {
-    this._AuthService.currentUserData.subscribe(()=>
+    this._AuthService.currentUserData.subscribe((currentData:any)=>
     {      
-    if (this._AuthService.currentUserData.getValue()) 
+      
+    if (currentData) 
       {
         this.isLogin = true; 
         if (localStorage.getItem('updatedData')) // updated profile data
         {
-          this.userData = this._AuthService.currentUserData.getValue();        
+          this.userData = currentData;        
           this.userName = this.userData.full_name;
           return;
         }
-        this.userData = this._AuthService.currentUserData.getValue().user;        
-        this.userName = this.userData.full_name;
+        this.userData = currentData.user;        
+        this.userName = this.userData.full_name;        
       }
       else
       {
@@ -46,20 +49,20 @@ export class NavbarComponent implements OnInit {
     
     this.isLogin = false;
     this._Router.navigate(['/login']);
-    
   }
 
   profile_Dropdwon()
   {
-    if($('li').css('opacity') != 0) 
+    if($('#profile_menu li').css('opacity') != 0) 
     {
-      $('li').css('opacity', '0');
-      $('.action').animate({bottom:'0px',opacity: '0'}, 'fast');
+      $('#profile_menu li').css('opacity', '0');
+      $('.action').animate({bottom:'0px',opacity: '0',height:'0px'}, 'fast');
+      $('.action').css('display', 'none');
     }
     else
     {
-      $('.action').css('bottom', '');
-      $('li').css('opacity', '1');
+      $('.action').css({'bottom': '', 'display':'block', 'height':''});
+      $('#profile_menu li').css('opacity', '1');
       $('.action').animate({opacity: '1'}, 'fast');
     }
   }

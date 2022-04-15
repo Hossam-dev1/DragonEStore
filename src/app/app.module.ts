@@ -4,6 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+
+
+
+
+import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
+
+
+
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +27,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 
 
@@ -33,6 +44,8 @@ import { ProfileInfoComponent } from './profile-info/profile-info.component';
     LoginComponent,
     ProfileComponent,
     ProfileInfoComponent,
+    DashboardComponent,
+
   ],
   imports: [  
     BrowserModule,
@@ -41,7 +54,18 @@ import { ProfileInfoComponent } from './profile-info/profile-info.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
     ToastrModule.forRoot(),
+
+    NgbPaginationModule,
+    NgbAlertModule,
+    
+
+
+    
+    
+
+    
     
     
   ],
