@@ -13,18 +13,22 @@ export class AuthService {
 
   baseURL:any = 'https://api.dragonestore.tk/';
   currentUserData:any = new BehaviorSubject(null);
-  
-  encodeToken:any = localStorage.getItem('currentUser');    
-  headers:any = new HttpHeaders().set('Authorization', 'Bearer'+this.encodeToken);
+
+  userRole:string = '';
+  headers:any = new BehaviorSubject(null);
 
   constructor(private _HttpClient:HttpClient)
   {    
     if(localStorage.getItem('currentUser'))
     {
+      
       this.saveUserData();
+      console.log(this.headers.getValue());
+
       if (localStorage.getItem('updatedData')) 
       {
         let userData = localStorage.getItem('updatedData');
+        
         this.currentUserData.next(JSON.parse(userData!))
       }  
     }
@@ -45,20 +49,23 @@ export class AuthService {
   updateProfile(profileData:any):Observable<any>
   {
 
-    return this._HttpClient.post(this.baseURL+'profile', profileData, {headers:this.headers});
+    return this._HttpClient.post(this.baseURL+'profile', profileData, {headers:this.headers.getValue()});
   }
 
   updatePassword(passwordData:any):Observable<any>
   {
-    return this._HttpClient.post(this.baseURL+'profile/change-password', passwordData, {headers:this.headers});
+    return this._HttpClient.post(this.baseURL+'profile/change-password', passwordData, {headers:this.headers.getValue()});
   }
 
   saveUserData()
   {
     let encodeToken:any = localStorage.getItem('currentUser');
+    // console.log(encodeToken);
+    
+    this.headers.next(new HttpHeaders().set('Authorization', 'Bearer'+encodeToken));
     let decodeToken:any = jwtDecode(encodeToken);
     this.currentUserData.next(decodeToken);
-    // console.log(this.currentUserData.getValue().user);
+    this.userRole = this.currentUserData.getValue().user.role
     
   }
 

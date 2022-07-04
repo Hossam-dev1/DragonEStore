@@ -1,23 +1,32 @@
 <section class="dash">
     <div class="container">
       <div class="row">
+
         <div class="col-md-1">
           <div class="sideBar">
-            <h2><i class="fa-solid fa-globe"></i> Dashboard</h2>
+            <h5><i class="fa-solid fa-globe"></i> Dashboard</h5>
             <ul>
-              <li id="category_tab"><i class="fa-solid fa-indent"></i> Categories</li>
-              <li id="product_tab"><i class="fa-solid fa-mobile-screen-button"></i> Products</li>
-              <li id="approval_tab"><i class="fa-solid fa-clock-rotate-left"></i> Approval</li>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button *ngIf="userRole == 'admin' " class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Categories</button>
+                  <button *ngIf="userRole == 'admin' " class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Products</button>
+                  <button  class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Approval</button>
+                </div>
+
             </ul>
           </div>
-          
         </div>
+
+
+
+    <div class="tab-content col-md-11" id="nav-tabContent">
+
         <!-- Categories Container -->
-        <div id="categories" class="col-md-11">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div *ngIf="userRole == 'admin' " id="categories" >
           <h1 class="text-center fw-bold">Categories</h1>
           <button class="btn btn-lg btn-primary" (click)="open(content)">Add New <i class="fa-solid fa-plus"></i></button>
-          <div *ngIf="productMessage" id="success-alert" class="alert alert-success" role="alert">
-            <p>{{productMessage}} </p>
+          <div *ngIf="message" id="success-alert" class="alert alert-success" role="alert">
+            <p>{{message}} </p>
           </div>
           <table class="table table-striped table-hover">
                   <thead   class="table-dark">
@@ -36,12 +45,12 @@
                       <td><img [src]="item.image" alt=""></td>
                       <td *ngIf="item.deleted == false"><i class="fa-solid fa-circle-check text-success"></i></td>
                       <td *ngIf="item.deleted == true"><i class="fa-solid fa-circle-xmark text-danger"></i></td>
-  
+
                       <td>
                         <button (click)="editCat(item.id, edit_cat)" type="button" class="btn btn-outline-primary mx-2"
                         ><i class="fas fa-edit"></i>
                         </button>
-
+                        
                         <button (click)="deleteCat(item.id)" type="button" class="btn btn-outline-danger mx-2"
                         ><i class="fas fa-trash-can"></i>
                         </button>
@@ -50,74 +59,15 @@
               </tbody>
             </table>
         </div>
-
-            <!-- Add Modellllllllllll -->
-    <ng-template #content let-modal>
-      
-      <div class="modal-header">
-
-        <h2 class="modal-title" id="modal-basic-title">New Category</h2>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="catForm" (ngSubmit)="createCat(catForm)">
-          <div class="mb-3">
-            <div class="form-group">
-              <label class="form-label">Category Name</label>
-              <input formControlName="name" type="text" class="form-control">
-            </div>
-          </div>
 
-          <div class="mb-3">
-              <div class="form-group">
-                <label class="form-label">Category Image </label>
-                <input (change)="getFile($event)"  type="file" class="form-control" required>
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-            </div>
-        </form>
-      </div>
-    </ng-template>
-    
-    <!-- Editttttttt Modellllllllllllllllll -->
-    <ng-template #edit_cat let-modal>
-    
-      <div class="modal-header">
-        <h2 class="modal-title" id="modal-basic-title">Edit Category</h2>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="updatedForm" (ngSubmit)="updateCat(updatedForm)">
-          <div class="mb-3">
-            <div class="form-group">
-              <label class="form-label">Category Name</label>
-              <input formControlName="name" type="text" class="form-control" >
-            </div>
-          </div>
-
-          <div class="mb-3">
-              <div class="form-group">
-                <label class="form-label">Category Image </label>
-                <input (change)="getUpdatedFile($event)"  type="file" class="form-control">
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-            </div>
-        </form>
-      </div>
-    </ng-template>
-
-        <!-- Productsss Container -->
-        <div id="products" class="col-md-11 d-none">
+          <!-- Productsss Container -->
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div *ngIf="userRole == 'admin' " id="products">
           <h1 class="text-center fw-bold">Products</h1>
-          <button class="btn btn-lg btn-primary" (click)="open(products)">Add New <i class="fa-solid fa-plus"></i></button>
-          <div *ngIf="message" id="success-alert" class="alert alert-success" role="alert">
-            <p>{{message}} </p>
+          <!-- <button class="btn btn-lg btn-primary" (click)="open(products)">Add New <i class="fa-solid fa-plus"></i></button> -->
+          <div *ngIf="productMessage" id="success-alert" class="alert alert-success" role="alert">
+            <p>{{productMessage}} </p>
           </div>
           <table class="table table-striped table-hover">
                   <thead   class="table-dark">
@@ -131,8 +81,10 @@
                       <th>approval_status</th>
                       <th>Action</th>
                   </tr>
-              </thead>
-              <tbody *ngFor="let item of productsData">
+                  </thead>
+                  <ng-container *ngIf="productsData">
+
+              <tbody *ngFor="let item of productsData" >
                   <tr>    
                       <td>{{item.id}}</td>
                       <td>{{item.name}} </td>
@@ -141,32 +93,34 @@
                       <td>{{item.price}}$ </td>
                       <td><img [src]="item.cover_image.path" alt=""></td>
                       <td *ngIf="item.approval_status == 'approved' "><i class="fa-solid fa-circle-check text-success"></i></td>
-                      <td *ngIf="item.approval_status == 'pending' "><i class="fa-solid fa-circle-xmark text-danger"></i></td>
-  
+                      <td *ngIf="item.approval_status == 'canceled' "><i class="fa-solid fa-circle-xmark text-danger"></i></td>
+                      <td *ngIf="item.approval_status == 'pending' "><i class="fa-solid fa-spinner text-primary fa-spin-pulse fa-spin-reverse"></i></td>
+
                       <td>
-                        <button (click)="editProduct(item.id, edit_product)" type="button" class="btn btn-outline-primary mx-2"
+                        <!-- <button (click)="editProduct(item.id, edit_product)" type="button" class="btn btn-outline-primary mx-2"
                         ><i class="fas fa-edit"></i>
-                        </button>
+                        </button> -->
   
                         <button (click)="showProduct(item.id, show_product)" type="button" class="btn btn-outline-success mx-2"
                         ><i class="fas fa-solid fa-eye"></i>
                         </button>
-    
+                        <!--     
                         <button (click)="deleteProduct(item.id)" type="button" class="btn btn-outline-danger mx-2"
                         ><i class="fas fa-trash-can"></i>
-                        </button>
+                        </button> -->
                       </td>
-
-  
                   </tr>
               </tbody>
+            </ng-container>
+
             </table>
         </div>
+      </div>
 
 
-        <!-- Approval Productssss -->
-
-        <div id="approval" class="col-md-11 d-none">
+      <div [ngClass]="{'fade show active':userRole == 'seller'} " class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+        <!-- Admin Approval Productssss -->
+        <div *ngIf="userRole == 'admin' " id="approval" >
           <h1 class="text-center fw-bold">Approval Products</h1>
           <!-- <button class="btn btn-lg btn-primary" (click)="open(products)">Add New <i class="fa-solid fa-plus"></i></button> -->
           <div *ngIf="statusMessage" id="success-alert" class="alert alert-success" role="alert">
@@ -189,7 +143,7 @@
                   <tr>    
                       <td>{{item.id}}</td>
                       <td>{{item.name}} </td>
-                      <td>{{item.category.name}} </td>
+                      <td>{{item.category?.name}} </td>
                       <td>{{item.seller.full_name}} </td>
                       <td>{{item.price}}$ </td>
                       <td><img [src]="item.cover_image.path" alt=""></td>
@@ -212,13 +166,132 @@
             </table>
         </div>
 
+        <!-- Seller Products Status -->
+        <div   *ngIf="userRole == 'seller' " id="approval" >
+          <h1 class="text-center fw-bold">My Products Status</h1>
+          <button class="btn btn-lg btn-primary" (click)="open(products)">Add New <i class="fa-solid fa-plus"></i></button>
+          <div *ngIf="productMessage" id="success-alert" class="alert alert-success" role="alert">
+            <p>{{productMessage}} </p>
+          </div>
+          <table class="table table-striped table-hover">
+                  <thead   class="table-dark">
+                  <tr >
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Category Name</th>
+                      <th>Seller Name</th>
+                      <th>Price</th>
+                      <th>Product_Cover</th>
+                      <th>approval_status</th>
+                      <th>Action</th>
+                  </tr>
+              <tbody *ngFor="let item of allSellerItems" >
+                  <tr>    
+                      <td>{{item.id}}</td>
+                      <td>{{item.name}} </td>
+                      <td>{{item.category?.name}} </td>
+                      <td>{{item.seller.full_name}} </td>
+                      <td>{{item.price}}$ </td>
+                      <td><img [src]="item.cover_image.path" alt=""></td>
+                      <td *ngIf="item.approval_status == 'approved' "><i class="fa-solid fa-circle-check text-success"></i></td>
+                      <td *ngIf="item.approval_status == 'canceled' "><i class="fa-solid fa-circle-xmark text-danger"></i></td>
+                      <td *ngIf="item.approval_status == 'pending' "><i class="fa-solid fa-spinner text-primary fa-spin-pulse fa-spin-reverse"></i></td>
+
+  
+                      <td>
+                        <button (click)="editProduct(item.id, edit_product)" type="button" class="btn btn-outline-primary mx-2"
+                        ><i class="fas fa-edit"></i>
+                        </button>
+  
+                        <button (click)="showProduct(item.id, show_product)" type="button" class="btn btn-outline-success mx-2"
+                        ><i class="fas fa-solid fa-eye"></i>
+                        </button>
+    
+                        <button (click)="deleteProduct(item.id)" type="button" class="btn btn-outline-danger mx-2"
+                        ><i class="fas fa-trash-can"></i>
+                        </button>
+                      </td>
+
+  
+                  </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    
+
+
+
+
+
       </div>
 
 
     </div>
 
+    
+            <!-- Add Modellllllllllll -->
+            <ng-template #content let-modal>
+      
+              <div class="modal-header">
+        
+                <h2 class="modal-title" id="modal-basic-title">New Category</h2>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="catForm" (ngSubmit)="createCat(catForm)">
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Category Name</label>
+                      <input formControlName="name" type="text" class="form-control">
+                    </div>
+                  </div>
+        
+                  <div class="mb-3">
+                      <div class="form-group">
+                        <label class="form-label">Category Image </label>
+                        <input (change)="getFile($event)"  type="file" class="form-control" required>
+                      </div>
+                    </div>
+        
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                    </div>
+                </form>
+              </div>
+            </ng-template>
+            
+            <!-- Editttttttt Modellllllllllllllllll -->
+            <ng-template #edit_cat let-modal>
+            
+              <div class="modal-header">
+                <h2 class="modal-title" id="modal-basic-title">Edit Category</h2>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="updatedForm" (ngSubmit)="updateCat(updatedForm)">
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <label class="form-label">Category Name</label>
+                      <input formControlName="name" type="text" class="form-control" >
+                    </div>
+                  </div>
+        
+                  <div class="mb-3">
+                      <div class="form-group">
+                        <label class="form-label">Category Image </label>
+                        <input (change)="getUpdatedFile($event)"  type="file" class="form-control">
+                      </div>
+                    </div>
+        
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                    </div>
+                </form>
+              </div>
+            </ng-template>
           <!-- Add Products Modellllllllllll -->
-    <ng-template #products let-modal>
+          <ng-template #products let-modal>
       
       <div class="modal-header">
 
@@ -236,7 +309,7 @@
 
           <div class="mb-3">
             <div class="form-group">
-              <label class="form-label">description</label>
+              <label class="form-label">Description</label>
               <input formControlName="description" type="text" class="form-control">
             </div>
           </div>
@@ -244,7 +317,8 @@
           <div class="mb-3">
             <div class="form-group">
               <label class="form-label">Category Name</label>
-              <select  formControlName="category_id" class="form-select form-select-md" >              
+              <select  formControlName="category_id" class="form-select  form-select-md" aria-label="Default select example" place >   
+                <option disabled selected value="">Choose a category</option>           
                 <option *ngFor="let item of catsData"  [value]="item.id">{{item.name}} </option>
               </select>
             </div>
@@ -296,7 +370,7 @@
             </div>
         </form>
       </div>
-    </ng-template>
+          </ng-template>
 
         <!-- show productttttttttt modellllllll -->
 
@@ -449,7 +523,7 @@
           </div>
         </ng-template>
     
-
+      </div>
 </section>
 
 

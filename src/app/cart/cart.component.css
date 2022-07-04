@@ -1,0 +1,106 @@
+.cart .product_content img
+{
+    height: 8rem;
+    border-radius: 50%;
+}
+.cart .product_content .name
+{
+    font-weight: 600;
+    margin: 0;
+}
+.cart .product_content span
+{
+    color: #777;
+    font-size: 13px;
+}
+.cart  .price
+{
+    margin: 8px 0;
+    font-weight: 600;
+    color: #444;
+}
+.cart .product_content .desc
+{
+    color: #555;
+}
+.cart .quantity
+{
+    background-color: whitesmoke;
+    border-radius: 4px;
+    padding: 3px;
+    display: flex;
+    justify-content: space-around;
+}
+.cart .quantity span
+{
+    border-right: #888 solid 1px;
+    border-left: #888 solid 1px;
+    padding: 0 8px;
+    font-weight: bolder;
+    /* color: #666; */
+}
+.cart .quantity button
+{
+    border: none;
+    background-color: whitesmoke;
+    margin: 0 6px;
+    opacity: 0.5;
+}
+.cart .quantity button:hover
+{
+    opacity: 0.9;
+}
+
+.cart .discont
+{
+    background-color: darkslategrey;
+    color: white;
+    width: 100px;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+.cart .cart_totals
+{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 20px;
+}
+.cart .cart_totals h4
+{
+    margin-bottom: 30px;
+}
+.cart .totalDetails
+{
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+.cart .checkout button
+{
+    width: 100%;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+.cart tfoot
+{
+    border: gainsboro solid 1px;;
+}
+.cart .coupon input
+{
+    border: #777 solid 1px;
+    padding: 5px;
+    margin-right: 15px;
+    height: 35px;
+}
+
+.cart .btn
+{
+    background-color: #333;
+    border: none;
+}
+.cart .btn:hover,:focus
+{
+    box-shadow: none;
+    opacity: 0.85;
+}

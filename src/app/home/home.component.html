@@ -1,9 +1,7 @@
+
 <section class="home">
     <div class="home_layer"></div>
-    <div id="sideBar" class="sideBar">
-        <i id="close-bar" class="fas fa-times"></i>
-    </div>
-    <div class="sideBar_lightbox"></div>
+
     <div class="container text-white">
         <div class="row">
             <div class="col-md-6">
@@ -61,12 +59,12 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="box">
-                    <div class="content_img">
+                    <div class="content_img" >
                         <img class="box_img" src="assets/lab.jpg" alt="">
                     </div>
                     <div class="box_content ">
                         <h1 class="img_head">On Sale Laptops</h1>
-                        <a class="img_head" href="#"><button class="btn btn-outline-dark">Shop Now <i class="fa-solid fa-cart-shopping"></i></button></a>
+                        <a class="img_head" routerLink="/shop"><button class="btn btn-outline-dark">Shop Now <i class="fa-solid fa-cart-shopping"></i></button></a>
                     </div>
                 </div>
             </div>
@@ -77,7 +75,7 @@
                     </div>
                     <div class="box_content">
                         <h1 class="img_head">50% OFF Watches</h1>
-                        <a class="img_head" href="#"><button class="btn btn-outline-dark">Shop Now <i class="fa-solid fa-cart-shopping"></i></button></a>
+                        <a class="img_head" routerLink="/shop"><button class="btn btn-outline-dark">Shop Now <i class="fa-solid fa-cart-shopping"></i></button></a>
                     </div>
                 </div>
             </div>
@@ -88,7 +86,7 @@
                     </div>
                     <div class="box_content ">
                         <h1 class="img_head">New Headphones</h1>
-                        <a class="img_head" href="#"><button class="btn btn-outline-dark">Shop Now <i class="fa-solid fa-cart-shopping"></i></button></a>
+                        <a class="img_head"routerLink="/shop"><button class="btn btn-outline-dark">Shop Now <i class="fa-solid fa-cart-shopping"></i></button></a>
                     </div>
                 </div>
             </div>
@@ -101,76 +99,34 @@
     <div class="container">
     <h1>FEATURED PRODUCTS</h1>
         <div class="row">
-            <div class="col-md-3">
-                <div class="productBox">
-                    <div class="product_img">
-                        <div class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
-                        <img class="img-fluid" src="assets/product 5.jpg" alt="">
-                    </div>
-                    <p class="type">Mpbile Phone</p>
-                    <h3 class="name">I Phone 6</h3>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <h6 class="price">$300.00 </h6>
-                    <a class="img_head" href="#"><button class="btn btn-outline-dark">Add To Cart</button></a>
-                </div>
-            </div>
+            <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let item of showProducts|existedItems:showProducts">
+                    <ng-template carouselSlide [id]="item.id">
+                        <div class="productBox">
+                            <div class="product_img">
+                                <div [routerLink]="['/productdetails', item.id, item.category?.id]" class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <img class="img-fluid" [src]="item.cover_image.path" alt="">
+                            </div>
+                            <p class="type">{{item.category?.name || 'category name' }} </p>
+                            <h5 class="name">{{item.name}}</h5>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <h6 class="price">${{item.price}}</h6>
+                            <a (click)="addItemToCart(item.id)" class="img_head" ><button class="btn btn-outline-dark">Add To Cart</button></a>
+                        </div>
+                    </ng-template>
+                  </ng-container>
+                
+        </owl-carousel-o>
+
+
+
             
-            <div class="col-md-3">
-                <div class="productBox">
-                    <div class="product_img">
-                        <div class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
-                        <img class="img-fluid" src="assets/product 6.jpg" alt="">
-                    </div>
-                    <p class="type">Head Phone</p>
-                    <h3 class="name">Head Phone 1711</h3>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <h6 class="price">$300.00 </h6>
-                    <a class="img_head" href="#"><button class="btn btn-outline-dark">Add To Cart</button></a>
-                    
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="productBox">
-                    <div class="product_img">
-                        <div class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
-                        <img class="img-fluid" src="assets/product 7.jpg" alt="">
-                    </div>
-                    <p class="type">Head Phone</p>
-                    <h3 class="name">I Phone 6</h3>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <h6 class="price">$300.00 </h6>
-                    <a class="img_head" href="#"><button class="btn btn-outline-dark">Add To Cart</button></a>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="productBox">
-                    <div class="product_img">
-                        <div class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
-                        <img class="img-fluid" src="assets/product 4.jpg" alt="">
-                    </div>
-                    <p class="type">Head Phone</p>
-                    <h2 class="name">I Phone 6</h2>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <h4 class="price">$300.00 </h4>
-                    <a class="img_head" href="#"><button class="btn btn-outline-dark">Add To Cart</button></a>
-                </div>
-            </div>
+            
+
         </div>
     </div>
 </section>

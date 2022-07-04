@@ -1,3 +1,5 @@
+import { CartComponent } from './cart/cart.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 
 import { ProfileGuard } from './profile.guard';
@@ -15,6 +17,8 @@ const routes: Routes = [
   {path:'home',component:HomeComponent},
   {path:'', redirectTo:'home', pathMatch:'full'},
   {path:'shop',component:ShopComponent},
+  {path:'cart', canActivate:[ProfileGuard] ,component:CartComponent},
+  {path:'productdetails/:proId/:catId',component:ProductDetailsComponent},
   {path:'register', canActivate:[AuthGuard], component:RegisterComponent},
   {path:'login' , canActivate:[AuthGuard], component:LoginComponent},
   {path:'profile' , canActivate:[ProfileGuard], component:ProfileComponent},
@@ -26,7 +30,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes , { useHash: true }) ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,7 +1,7 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
+import { Observable, throwError, BehaviorSubject, Subscription } from 'rxjs';
 
 
 @Injectable({
@@ -40,10 +40,24 @@ export class ProductsService {
 
   // Productssss
   
-  getAllProducts():Observable<any>
+  getAllProducts(pValue:any = null):Observable<any>
   {
-    return this._HttpClient.get(this.baseURL+'products');
+    return this._HttpClient.get(this.baseURL+`products?page=${pValue}`);
   }
+  getProductsPerPage(pValue:any = null):Observable<any>
+  {
+    return this._HttpClient.get(this.baseURL+`products?per_page=${pValue}`);
+  }
+  getProductById(id:any):Observable<any>
+  {
+    return this._HttpClient.get(this.baseURL+`products/${id}`);
+  }
+  getProductByCat(catValue:any):Observable<any>
+  {
+    return this._HttpClient.get(this.baseURL+`products?category_id=${catValue}`);
+  }
+
+  // Products CRUD
 
   createProduct(proData:any):Observable<any>
   {
@@ -71,6 +85,7 @@ export class ProductsService {
   {
     return this._HttpClient.post(this.baseURL+`products/${id}/approval`, status, {headers:this.headers});
   }
+
 
   
 }

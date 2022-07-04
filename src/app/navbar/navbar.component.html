@@ -5,7 +5,8 @@
     <nav id="menu" class="navbar navbar-expand-lg  ">
         <a class="nav-link "  routerLink="/home" routerLinkActive="activebutton" >Home</a>
         <a class="nav-link" routerLink="/" routerLinkActive="router-link-active">About</a>
-        <a class="nav-link"  routerLink="/shop" routerLinkActive="activebutton" >Shop </a> 
+        <a class="nav-link "  routerLink="/shop" routerLinkActive="activebutton" >Shop</a>
+
         <!-- <a class="nav-link" routerLink="/profile" routerLinkActive="activebutton" >Portofolio</a> -->
         <a class="nav-link" href="#contact">Contact</a>
     </nav>
@@ -20,27 +21,69 @@
                 </a>
             <div *ngIf="isLogin" class="action">
                 <div id="profile_menu" class="menu">
-                    <ul>
-                    <h3 class="text-center">{{ userName }}</h3>
+                    <ul > 
+                    <h6 class="text-center">{{ userName }}</h6>
                     <hr>
                         <li routerLink="/profile-info" ><i class="fa-solid fa-circle-user"></i> My Profile</li>
                         
                         <li routerLink="/profile"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</li>
-                        <li routerLink="/dashboard"><i class="fa-solid fa-user-gear"></i> Dashboard</li>
+                        <li  routerLink="/dashboard" *ngIf="userRole == 'admin' || userRole == 'seller' " ><i class="fa-solid fa-user-gear"></i> Dashboard</li>
                         <hr>
                         <li><a class="auth" *ngIf="isLogin"  (click)="logout()" ><i class="fa-solid fa-right-from-bracket"></i> Logout </a></li>
                     </ul>
                 </div>
             </div>
             
-            <div id="cart_menu" class="icon">
-                <i  class="fa-solid fa-bag-shopping "></i>
-                <span> $00.0</span>
+            <div (click)="sideBar()" id="cart_menu" class="icon">
+                <div *ngIf="cartLength > 0" class="cartNum">{{cartLength}}</div>
+                <i  class="fa-solid fa-bag-shopping  "></i>
+                <span> ${{cartTotal}}</span>
             </div>
         </div>
         <i id="menu-bar" class="fas fa-bars "></i>
+        <!-- Cart sideBarrrrrrrrr -->
+        <div id="sideBar" class="sideBar">
+            <i (click)="closeSideBar()" id="close-bar" class="fas fa-times"></i>
 
+            <div class="container-fluid">
+                
+                <div class="cartItems">
+                    <div class="cart_content" *ngFor="let item of cartItems">
+                        <div class="row " >
+                        <div class="col-md-5">
+                            <div class="cart_img position-relative">
+                                <img [src]="item.product.cover_image.path" class="img-thumbnail w-100"  alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="item_details">
+                                <h5>{{item.product.name}}</h5>
+                                <div class="priceContainer">
+                                    <h6>{{item.quantity}} x ${{item.product.final_price}} </h6>
+                                    <i (click)="deleteItem(item?.id)" id="remove_item" class="remove_item fa-solid fa-trash"></i>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                
+                <hr>
+                <div class="total text-center">
+                    <h4>Subtotal: <span>${{cartTotal}}</span></h4>
+                </div>
+                <hr>
+                <div class="cartBtns">
+                    <button (click)="closeSideBar()" routerLink="/cart" class="btn btn-dark">View Cart <i class="fa-solid fa-bag-shopping"></i></button>
+                    <button  class="btn btn-dark">Checkout <i class="fa-solid fa-money-check-dollar"></i></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div (click)="closeSideBar()" class="sideBar_lightbox"></div>
 
     
 

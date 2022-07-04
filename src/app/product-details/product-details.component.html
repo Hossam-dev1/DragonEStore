@@ -1,0 +1,75 @@
+<section class="product_header">
+    <div class="container">
+        <h2>Mobile Phone</h2>
+        <p>Home / category name / product name</p>
+    </div>
+</section>
+
+<section class="product_card">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product_img">
+
+                    <div  class="main_img">
+                        <!-- <img [src]="productDetails?.cover_image.path" alt=""> -->
+
+                        <lib-ngx-image-zoom class="img w-50" 
+                        [thumbImage]=productDetails?.cover_image.path
+                        [fullImage]=productDetails?.cover_image.path
+                        [magnification]="1.5"
+                        [enableScrollZoom]="true"
+                        [lensWidth]="100"
+                        [circularLens]="true"
+                    ></lib-ngx-image-zoom>
+                    </div>
+                    <div class="product_imgs">
+                        <div class="row">
+                            <div *ngFor="let img of productDetails?.images" [ngClass]="productDetails?.images.length > 4 ? 'col-md-2' : 'col-md-3' "  >
+                                <img (click)="slideImgs($event.target)"  id="item_img" class="img-fluid m-auto" [src]="img.path" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="product_details">
+                    <h1>{{productDetails?.name}}</h1>
+                    <!-- <p>{{productDetails?.category.name || 'category name'}} </p> -->
+                    <div class="reviews pb-2">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                    <span>reviews (13)</span>
+                    </div>
+                    <div class="price"><del class="">${{productDetails?.price}} </del> <span class="fw-bolder"> ${{productDetails?.final_price}}</span></div>
+                    <p>{{productDetails?.description}} </p>
+                    <h6>Available: <span class="items">{{productDetails?.stock}} items</span></h6>
+                    <div class="cartBtn py-4">
+                        <button (click)="addItemToCart(productDetails?.id)" class="btn btn-dark w-100">Add Cart <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h4 >Related Products</h4>
+    <owl-carousel-o [options]="customOptions">
+
+        <ng-template carouselSlide>
+                <div class="row">
+                    <div *ngFor="let item of relatedProducts" class="col-md-3">
+                        <div  class="slide">
+                            <img [src]="item.cover_image.path" class="">
+                            <h5>{{item.name}} </h5>
+                          </div>
+                    </div>
+                </div>
+          </ng-template>
+      </owl-carousel-o>
+    </div>
+
+</section>

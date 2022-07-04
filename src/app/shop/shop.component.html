@@ -1,81 +1,38 @@
 <section class="shop_header">
     <div class="stars"></div>
-    <h2>LET IT BEGIN!</h2>
+    <h5>LET IT BEGIN!</h5>
     <h1>BLACK FRIDAY</h1>
-    <h2>EXTRA 20% OFF SALE</h2>
+    <h5>EXTRA 20% OFF SALE</h5>
 </section>
-
-
-<nav class="bg-dark shop_nav">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-3">
-                <div class="category_bar">
-                    <span>Categoires </span>
-                    <i class="fa-solid fa-bars"></i>
-                    <div class="cat_list">
-                        <ul *ngFor="let cat of catsData">
-                            <li>{{cat.name}} </li>  
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-                <div class="col-md-9">
-                    <div class="menu_list">
-                        <ul>
-                            <li>Home</li>
-                            <div class="brands">
-                                <li class="brands_menu">All Brands <i class=" m-2 fa-solid fa-caret-down"></i></li>
-                                <div class="brand_list">
-                                    <ul>
-                                        <li>Mobile </li>  
-                                        <li>Tv</li>
-                                        <li>Labtobs</li>
-                                        <li>HeadPhones</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <li>Discount Products</li>
-                            <li>All Sellers</li>
-                        </ul>
-                    </div>
-                </div>
-        </div>
-        
-    </div>
-</nav>
-
-
 
 <section class="shop_container products">
     
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <div class="product_filter">
-                    <h3>Home / Shop</h3>
-                    <div class="search_input">
-                        <input class="form-control d-inline" type="text" placeholder="Search products..">
-                        <button class="btn btn-dark d-inline">Search</button>
-                    </div>
+                <div class="product_filter ">
 
-                    <h4 class="fw-bold">FILTER BY PRICE :</h4>
+                    <h5 class="my-4">Home/Shop</h5>
+                        <select (change)="filterByCat($event.target)" class="form-select my-5" aria-label="Default select example" place>
+                            <option disabled selected hidden>filter by Category</option>
+                            <option  *ngFor="let cat of catsData" [value]="cat.name">{{cat.name}}</option>
+                          </select>
+
+                    <h6 class="fw-bold">FILTER BY PRICE :</h6>
                     <div class="filter_input">
                       <form id="price-range-form">
                         <label for="min-price" class="form-label">Min price:  </label>
                         <span id="min-price-txt" class="fw-bold"> $0</span>
-                        <input type="range" class="form-range" min="0" max="999" id="min-price" step="1" value="0">
+                        <input type="range" class="form-range" min="0" max="999" id="min-price" step="1" value="0" (change)="getMinPrice($event.target)" >
+
                         <label for="max-price" class="form-label">Max price: </label>
                         <span id="max-price-txt" class="fw-bold"> $1000</span>
-                        <input type="range" class="form-range" min="1" max="1000" id="max-price" step="1" value="1000">
-                      </form>
+                        <input type="range" class="form-range" min="1" max="1000" id="max-price" step="1" value="1000" (change)="getMaxPrice($event.target)" >
+                    </form>
                     </div>
 
                     <div class="viewed my-3">
-                        <h5>RECENTLY VIEWED PRODUCTS</h5>
+                        <h6 class="fw-bold">RECENTLY VIEWED PRODUCTS</h6>
                             <div class="item d-flex">
                                 <img class="img-fluid" src="assets/mobile.jpg" alt="">
                                 <div class="item_details mt-3">
@@ -85,13 +42,13 @@
                             </div>
                                 <hr>
 
-                                <div class="item d-flex">
-                                    <img class="img-fluid" src="assets/mobile.jpg" alt="">
-                                    <div class="item_details mt-3">
-                                        <h6>Mobile Samsounq A53 </h6>
-                                        <h6>$300.00</h6>
-                                    </div>
+                            <div class="item d-flex">
+                                <img class="img-fluid" src="assets/mobile.jpg" alt="">
+                                <div class="item_details mt-3">
+                                    <h6>Mobile Samsounq A53 </h6>
+                                    <h6>$300.00</h6>
                                 </div>
+                            </div>
                                 <hr>
                     </div>
 
@@ -103,41 +60,72 @@
                 </div>
             </div>
             <div class="col-md-9">
+                <div class="row my-3">
+
+                    <div class="col-md-8">
+                        <div class="input-group-append">
+                        <input type="text" placeholder="Search about.. " [(ngModel)]='term' class="form-control bg-transparent" name="" id="search_input">
+                            <button class="btn btn-dark" id="search_icon" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            </div>
+                    </div>
+
+                    <div class="col-md-2 offset-2">
+                        <!-- <i class="fa-solid fa-table-cells dis"></i> -->
+                        <select (change)="getPerPage($event.target)" class="form-select" aria-label="Default select example" place>
+                            <option disabled selected hidden>Show </option>
+                            <option value="9" >9 Products</option>
+                            <option value="15">15 Products</option>
+                            <option value="24" >24 Products</option>
+                        </select>
+                    </div>
+                    
+                </div>
+
+                <div *ngIf="displayProducts.length < 1" class="spinerLoader w-100 text-center my-5">
+                    <i  class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                </div>
+
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="productBox">
+                        
+                        <div *ngFor="let item of displayProducts|search:term|catFilter:catType|existedItems:cartItems" class="col-md-4">
+                            <div  class="productBox" >
                                 <div class="product_img">
-                                    <div class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
-                                    <img class="img-fluid" src="assets/product 5.jpg" alt="">
+                                    <div [routerLink]="['/productdetails', item.id, item.category?.id]" class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                    <img class="img-fluid w-100" [src]="item.cover_image.path" alt="">
                                 </div>
-                                <p class="type">Mpbile Phone</p>
-                                <h3 class="name">I Phone 6</h3>
-                                <div class="stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star-half-stroke"></i>
+
+                                <div class="d-flex justify-content-between">
+                                <p class="type">{{item.category?.name || 'category name'}}  </p>
+                                    <div class="stars mt-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
                                 </div>
-                                <h4 class="price">$300.00 </h4>
-                                <a class="img_head" href="#"><button class="btn btn-outline-dark">Add To Cart</button></a>
+                                <h5 class="name ">{{item.name}} </h5>
+
+
+                                <h6 class="price">{{item.price}} $ </h6>
+                                <a id="addLinkBtn_{{item.id}}" class="img_head " ><button id="addItemBtn_{{item.id}}" class="btn btn-dark   " (click)="addItemToCart(item.id)">Add To Cart</button></a>
+                                <!-- <a *ngIf="isAdded" class="img_head " ><button disabled class="btn btn-outline-dark">Add To Cart</button></a> -->
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="productBox">
-                                <div class="product_img">
-                                    <div class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
-                                    <img class="img-fluid" src="assets/product 5.jpg" alt="">
-                                </div>
-                                <p class="type">Mpbile Phone</p>
-                                <h2 class="name">I Phone 6</h2>
-                                <div class="stars">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star-half-stroke"></i>
-                                </div>
-                                <h4 class="price">$300.00 </h4>
-                                <a class="img_head" href="#"><button class="btn btn-outline-dark">Add To Cart</button></a>
-                            </div>
-                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                            <li class="page-item " [ngClass]="{'disabled': currentPage <= 1}"   (click)="prevPagination()" ><a  class="page-link" >Prev</a></li>
+
+                            <li *ngFor="let item of page_items" class="page-item" (click)="getByPage(item.label)" [ngClass]="{'active': item.label == currentPage}" >
+                                <a class="page-link" >{{item.label}} </a>
+                            </li>
+
+                            <li class="page-item" (click)="nextPagination()" [ngClass]="{'disabled': currentPage >= lastPage}">
+                                <a class="page-link" >Next</a>
+                            </li>
+                            </ul>
+                        </nav>
+
                         <div class="col-md-3"></div>
                         <div class="col-md-3"></div>
                     </div>

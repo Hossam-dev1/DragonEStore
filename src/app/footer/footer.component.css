@@ -25,7 +25,7 @@ footer .footer_item h4
 .footer_item .brd
 {
     width: 10%;
-    height: 3px !important;
+    height: 4px !important;
     margin-bottom: 25px;
     /* padding-bottom: 10px; */
 }
@@ -44,6 +44,11 @@ footer .footer_item h4
 .footer_item h5,h3
 {
     margin: 0;
+}
+.footer_item input
+{
+    background-color: rgba(255,255,255,0.09);
+    border: none;
 }
 
 

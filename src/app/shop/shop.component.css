@@ -1,0 +1,22 @@
+.input-group-append
+{
+    position: relative;
+    /* background-color: tomato; */
+}
+#search_icon
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+input[type='text']:focus ,select:focus
+{
+    border-color: #888 !important;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.19) !important;
+}
+
+.page-item.active .page-link {
+
+    background-color: #444;
+    border-color: #444;
+}

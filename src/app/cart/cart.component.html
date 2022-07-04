@@ -1,0 +1,99 @@
+<section class="cart mt-5">
+    <div class="container">
+        <h4>Cart Shopping</h4>
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th class="text-center">Quantaty</th>
+                            <th class="text-center">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let item of cartData">
+                            <td>
+                                <div class="product_content">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="../../assets/22-1-270x338.jpg">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5 class="name">{{item.product.name}}</h5>
+                                            <span>category name</span>
+                                            <h6 class="price">${{item.product.price}}</h6>
+                                            <p class="desc">{{item.product.description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td >
+                                <div class="quantity">
+                                    <button (click)="decrease(item.id)"><i class="fa-solid fa-minus"></i></button>
+                                    <span>{{item.quantity}}</span>
+                                    <button (click)="increase(item.id)"><i class="fa-solid fa-plus"></i></button>
+                                </div>
+                                <div (click)="removeItem(item.id)" class="remove_item mt-2">
+                                    <span>Remove </span>
+                                    <i id="remove_icon_{{item.id}}" class="fa-solid fa-trash"></i>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="discont m-auto text-center">SAVED %{{item.product.discount}}</p>
+                                <h6 class="price text-center">${{ (item.product.final_price * item.quantity).toFixed(2) }}</h6>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                                <td>
+                                    <div class="coupon">
+                                        <input type="text" class="" placeholder="Coupon Code">
+                                        <button class="btn btn-dark ">Apply Coupon</button>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <div class="update">
+                                        <button [disabled]="cartData.length < 1" (click)="ClearCartItems()" class="btn btn-secondary w-100">Clear Cart</button>
+                                    </div>
+                                </td>
+                    </tfoot>
+                </table>
+                <div *ngIf="cartData.length == 0" class="alert alert-info text-center w-100">
+                    <p class="w-100">The Cart Is Empty!</p>
+                </div>
+            </div>
+            
+
+            <!-- cart Detailss -->
+            <div class="col-md-4">
+                <div class="cart_totals">
+                    <h4>Cart Details</h4>
+                    <div class="totalDetails subtotal">
+                        <h6>Subtotal:</h6>
+                        <h6>${{cartTotal}} </h6>
+                    </div>
+                    <hr>
+                    <div class="totalDetails taxs">
+                        <h6>Taxs:</h6>
+                        <h6>$15.00</h6>
+                    </div>
+                    <hr>
+                    <div class="totalDetails total">
+                        <h6>Total:</h6>
+                        <h6>${{cartTotal + 15.00}} </h6>
+                    </div>
+                    <hr>
+                    <div class="checkout">
+                        <button class="btn btn-dark">Proceed to checkout</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -2,6 +2,8 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { ProductsService } from './../../services/products.service';
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
+
 declare let $:any;
 
 
@@ -12,6 +14,7 @@ declare let $:any;
 })
 export class DashboardComponent implements OnInit {
 
+  userRole:string = ''
   closeResult:any = '';
   fileImg:any;
   message:string = '';
@@ -22,16 +25,23 @@ export class DashboardComponent implements OnInit {
   imgsArray:any []=[];
   currentProduct:any;
   unAppProducts:any;
-  
+  allSellerItems:any;
+  // sellerProductsStatus:any[]= [];
+
   productMessage:string = ''
   statusMessage:string = '';
 
-  constructor(private _ProductsService:ProductsService, private modalService: NgbModal) 
+  constructor(private _ProductsService:ProductsService, private modalService: NgbModal, private _AuthService:AuthService) 
   {
-    this.getCurrentCats();
-    this.getProducts();
-    this.getUnAppProducts()
-
+    this.userRole = this._AuthService.userRole;
+  
+      
+      this.getCurrentCats();
+      this.getProducts();
+      // console.log(this.catsData);
+      
+      this.getUnAppProducts();
+    
   }
 
   getCurrentCats()
@@ -39,7 +49,6 @@ export class DashboardComponent implements OnInit {
     this._ProductsService.getAllCat().subscribe((resp)=>
     {
       this.catsData = resp.data;
-      // console.log(resp.data);
     })
   }
 
@@ -61,9 +70,12 @@ export class DashboardComponent implements OnInit {
 
   createCat(catData:any)
   {
+    console.log(catData);
+
     let  formData = new FormData();
     formData.append('image', catData.value.image, this.fileImg.name);
     formData.append('name', catData.value.name);
+    
 
     this._ProductsService.createCat(formData).subscribe(
     (response)=>
@@ -104,6 +116,8 @@ export class DashboardComponent implements OnInit {
   {
     this.open(data);
     this.updatedCat = this.catsData.find( (catId)=> catId.id == id);
+    console.log(this.catsData);
+    
     
     for (let i = 0; i < this.catsData.length; i++) // Set Input old Values
     {
@@ -130,6 +144,7 @@ export class DashboardComponent implements OnInit {
         (response)=>
         { 
           this.message = response.message;
+          this.getCurrentCats();
           console.log(response);
           
         },
@@ -137,11 +152,7 @@ export class DashboardComponent implements OnInit {
         {
           this.message = error.message;
           console.log(error);
-        },
-        ()=>
-        {
-            this.getCurrentCats();
-        })  
+        })
   }
 
   // ======= Delete Category =========== //
@@ -152,18 +163,13 @@ export class DashboardComponent implements OnInit {
       (response)=>
       {
         this.message = response.message;
-        console.log(response);
-        
+        this.getCurrentCats();        
       },
       (errors)=>
       {
         this.message = errors.error.message;
         console.log(errors);
         
-      },
-      ()=>
-      {
-        this.getCurrentCats();
       })
   }
 
@@ -187,7 +193,7 @@ export class DashboardComponent implements OnInit {
     this._ProductsService.getAllProducts().subscribe(
       (resp)=>
       {
-        this.productsData = resp.data;        
+        this.productsData = resp.data.filter((product:any)=> product.category !== null )
       })
   }
 
@@ -242,11 +248,15 @@ export class DashboardComponent implements OnInit {
           this.productMessage = resp.message;
         }
         this.getProducts();
+        this.getUnAppProducts();
+        this.productsForm.reset();
         console.log(resp);
       },
       (errors)=>
       {
         this.productMessage = errors.error.message;
+        console.log(errors);
+        
       }
     )
     
@@ -254,16 +264,17 @@ export class DashboardComponent implements OnInit {
 
   // =======  Show Productt =========== //
 
-  showProduct(proId:any, show_product:any)
+  showProduct(proId:number, show_product:any)
   {
     this.open(show_product);
-    this.currentProduct = this.productsData.find((product)=> product.id == proId );
-    console.log(this.currentProduct);
+      this.currentProduct = this.productsData.find((product)=> product.id == proId );
+      console.log(this.currentProduct);
+  
   }
 
   // =======  Edit Productt =========== //
 
-  editProduct(proId:any, edit_product:any)
+  editProduct(proId:number, edit_product:any)
   {
     this.open(edit_product);
     this.productsForm.reset();
@@ -311,6 +322,7 @@ export class DashboardComponent implements OnInit {
     {
       this.productMessage = resp.message + ' the update is pending... ';
       this.getProducts();
+      this.getUnAppProducts();
     },
     (errors)=>
     {
@@ -328,14 +340,15 @@ export class DashboardComponent implements OnInit {
     this._ProductsService.deleteProduct(id).subscribe(
       (response)=>
       {
-        this.message = response.message;
+        this.productMessage = response.message;
         this.getProducts();
+        this.getUnAppProducts();
         console.log(response);
         
       },
       (errors)=>
       {
-        this.message = errors.error.message;
+        this.productMessage = errors.error.message;
         console.log(errors);
         
       })
@@ -348,14 +361,19 @@ export class DashboardComponent implements OnInit {
   {
     this._ProductsService.getUnApproveProduects().subscribe((resp)=>
     {
-      
-      let approvedProducts =  resp.data.filter((product:any) => product.approval_status == 'pending')
+      if(this.userRole == 'seller')
+      {
+        this.allSellerItems= resp.data;
+        return;
+      }
+      let approvedProducts =  resp.data.filter((product:any) => product.approval_status == 'pending');
+
       this.unAppProducts = approvedProducts;
-      console.log(this.unAppProducts);
-      
-      
+      console.log(resp.data);
     })
   }
+
+
 
   changeProStatus(statusValue:any, id:any)
   {
@@ -365,18 +383,18 @@ export class DashboardComponent implements OnInit {
       approval_status:statusValue
     }
     
-    this._ProductsService.changeProductStatus(status, id).subscribe((resp)=>
+    this._ProductsService.changeProductStatus(status, id).subscribe(
+    (resp)=>
     {
       this.statusMessage = resp.message;
       this.getUnAppProducts();
+      this.getProducts;
     },
     (errors)=>
     {
       console.log(errors);
       this.statusMessage = errors.error.message;
-      
-    }
-    )
+    })
   }
   open(content:any) 
   {    
@@ -387,42 +405,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-
-
-
-  
-
   ngOnInit(): void {
 
-    $('#category_tab').click(function()
-    { 
-      $("#products").removeClass('show active d-block');
-      $("#products").addClass('d-none');
-      $("#approval").addClass('d-none');
-
-      $("#categories").removeClass('d-none');
-      $("#categories").addClass('show active d-block');
-    })
-
-    $('#product_tab').click(function()
-    {
-      $("#categories").removeClass('show active d-block');
-      $("#categories").addClass('d-none');
-      $("#approval").addClass('d-none');
-
-      $("#products").removeClass('d-none');
-      $("#products").addClass('show active d-block');
-    })
-
-    $('#approval_tab').click(function()
-    {
-      $("#categories").removeClass('show active d-block');
-      $("#categories").addClass('d-none');
-      $("#products").addClass('d-none');
-
-      $("#approval").removeClass('d-none');
-      $("#approval").addClass('show active d-block');
-    })
+  
   }
 
 }

@@ -11,7 +11,7 @@
         <div class="form_items">
         <form [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
             <h2>Login Now! <i class="fas fa-user-check "></i></h2>
-            <h3 class="text-center mb-4">Already Have an Acount? <a class="link-secondary" routerLink="/register">Register</a></h3>
+            <h6 class="text-center mb-4">Already Have an Acount? <a class="link-secondary" routerLink="/register">Register</a></h6>
 
             <div  *ngIf="errorMessage" class="alert alert-danger">
                 <p class="alert">{{errorMessage}}</p>

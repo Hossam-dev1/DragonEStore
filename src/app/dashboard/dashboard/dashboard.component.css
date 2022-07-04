@@ -7,7 +7,7 @@
     height: 80px;
     width: 80px;
 }
-.dash ul li, .fa-spin-pulse, .fa-circle-check
+.dash ul li, .fa-spin-pulse, .fa-circle-check,.fa-circle-xmark
 {
     font-size: 22px;
 }
@@ -32,37 +32,32 @@ table
     background-color: white;
     height: 100vh;
     width: 200px;
-    position: absolute;
     position: fixed;
     left: 0;
+    z-index: 10 !important;
 }
-.dash .sideBar h2
+.dash .sideBar h5
 {
     background-color: #282828;
     color: whitesmoke;
     text-align: center;
     padding: 23px 0;
 }
-.dash .sideBar ul
+.dash .sideBar .nav-link
 {
-    margin-top: 40px;
-}
-.dash .sideBar ul li
-{
-    padding: 10px;
+    /* background-color: tan; */
     font-size: 20px;
-    cursor: pointer;
-    opacity: 0.8;
-    color: #666;
-    transition: all 0.2s;
-    
+    display: block !important;
+    width: 100%;
+    margin:10px 0;
 }
-.dash .sideBar ul li:hover
-{   color: #282828;
-    opacity: 1;
-}
+
 .Products_imgs img
 {
     width: 20%;
     padding: 2px;
+}
+.nav-tabs
+{
+    border: 0;
 }

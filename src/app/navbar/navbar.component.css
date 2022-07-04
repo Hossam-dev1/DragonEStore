@@ -1,9 +1,5 @@
 
-.head
-{
-    background-color: white;
-    /* border-bottom: 0.5px solid gray; */
-}
+
 header {
     position: fixed;
     left: 0;
@@ -12,15 +8,39 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: white;
     padding: 0px 80px;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    z-index: 99;
+    z-index: 1;
 }
 .head img
 {
     height: 80px;
 }
-
+.sideBar .cart_content
+{
+    max-height: calc(100vh - 250px);
+    overflow: hidden;
+    overflow-y: auto;
+}
+#cart_menu
+{
+    position: relative;
+}
+#cart_menu .cartNum
+{
+    color: #fff;
+    background-color: #f65b0e;
+    text-align: center;
+    font-size: 11px;
+    min-width: 1.6em;
+    height: 1.6em;
+    border-radius: 100%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 11;
+}
 .nav-link {
     font-size: 18px;
     font-weight: 600;
@@ -83,7 +103,7 @@ header {
     font-size: 15px !important;
 }
 
-.fas {
+#menu-bar {
     font-size: 25px;
     cursor: pointer;
     color: #222;
@@ -105,7 +125,7 @@ header {
         margin-left: auto;
         padding-right: 5px;
     }
-    .fas {
+    #menu-bar {
         display: block;
     }
     nav a {
@@ -139,6 +159,7 @@ header {
 .info
 {
     position: relative !important;
+    z-index: 11;
 }
 .info .profile img
 {
@@ -184,7 +205,7 @@ header {
 .info .action ul
 {
     padding-left: 0;
-    padding-right: 15px;
+    /* padding-right: 15px; */
 }
 .info .action ul li
 {
@@ -197,6 +218,7 @@ header {
     cursor: pointer;
     opacity:0;
 }
+
 .info .action ul li:hover .fa-solid
 {
     color: black;
@@ -204,6 +226,7 @@ header {
 .info hr
 {
     margin: 0 !important;
+    margin-bottom: 5px;
 }
 .info .action ul li i
 {
