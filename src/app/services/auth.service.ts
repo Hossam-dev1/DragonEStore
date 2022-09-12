@@ -14,7 +14,7 @@ export class AuthService {
   baseURL:any = 'https://api.dragonestore.tk/';
   currentUserData:any = new BehaviorSubject(null);
 
-  userRole:string = '';
+  userRole:any = new BehaviorSubject(null);
   headers:any = new BehaviorSubject(null);
 
   constructor(private _HttpClient:HttpClient)
@@ -23,7 +23,7 @@ export class AuthService {
     {
       
       this.saveUserData();
-      console.log(this.headers.getValue());
+      // console.log(this.headers.getValue());
 
       if (localStorage.getItem('updatedData')) 
       {
@@ -65,7 +65,7 @@ export class AuthService {
     this.headers.next(new HttpHeaders().set('Authorization', 'Bearer'+encodeToken));
     let decodeToken:any = jwtDecode(encodeToken);
     this.currentUserData.next(decodeToken);
-    this.userRole = this.currentUserData.getValue().user.role
+    this.userRole.next(this.currentUserData.getValue().user.role);
     
   }
 

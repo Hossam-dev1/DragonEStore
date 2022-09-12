@@ -101,21 +101,21 @@
         <div class="row">
             <owl-carousel-o [options]="customOptions">
                 <ng-container *ngFor="let item of showProducts|existedItems:showProducts">
-                    <ng-template carouselSlide [id]="item.id">
+                    <ng-template carouselSlide [id]="item?.id">
                         <div class="productBox">
                             <div class="product_img">
-                                <div [routerLink]="['/productdetails', item.id, item.category?.id]" class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <div [routerLink]="['/productdetails', item?.id, item.category?.id]" class="product_img_layer"><i class="fa-solid fa-magnifying-glass"></i></div>
                                 <img class="img-fluid" [src]="item.cover_image.path" alt="">
                             </div>
                             <p class="type">{{item.category?.name || 'category name' }} </p>
-                            <h5 class="name">{{item.name}}</h5>
+                            <h5 class="name">{{item?.name}}</h5>
                             <div class="stars">
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star"></i>
                                 <i class="fa-solid fa-star-half-stroke"></i>
                             </div>
-                            <h6 class="price">${{item.price}}</h6>
-                            <a (click)="addItemToCart(item.id)" class="img_head" ><button class="btn btn-outline-dark">Add To Cart</button></a>
+                            <h6 class="price">${{item?.price}}</h6>
+                            <a (click)="addItemToCart(item?.id)" class="img_head" ><button class="btn btn-outline-dark">Add To Cart</button></a>
                         </div>
                     </ng-template>
                   </ng-container>

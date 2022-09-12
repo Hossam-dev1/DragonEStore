@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(private _AuthService:AuthService, private _Router:Router,private formBuilder: FormBuilder, private toastr: ToastrService) 
   {
-
+    
   }
 
 

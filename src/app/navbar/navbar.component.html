@@ -6,9 +6,10 @@
         <a class="nav-link "  routerLink="/home" routerLinkActive="activebutton" >Home</a>
         <a class="nav-link" routerLink="/" routerLinkActive="router-link-active">About</a>
         <a class="nav-link "  routerLink="/shop" routerLinkActive="activebutton" >Shop</a>
+        <a class="nav-link cart_navLink" routerLink="/cart" routerLinkActive="activebutton" >Cart</a>
+
 
         <!-- <a class="nav-link" routerLink="/profile" routerLinkActive="activebutton" >Portofolio</a> -->
-        <a class="nav-link" href="#contact">Contact</a>
     </nav>
 
 
@@ -40,16 +41,21 @@
                 <span> ${{cartTotal}}</span>
             </div>
         </div>
-        <i id="menu-bar" class="fas fa-bars "></i>
+
+        <i id="menu-bar" class="fas fa-bars" (click)="openMenu()"></i>
         <!-- Cart sideBarrrrrrrrr -->
         <div id="sideBar" class="sideBar">
             <i (click)="closeSideBar()" id="close-bar" class="fas fa-times"></i>
 
             <div class="container-fluid">
                 
+                <div *ngIf="cartItems.length == 0" class="alert alert-danger text-center w-100">
+                    <p class="w-100">The Cart Is Empty!</p>
+                </div>
                 <div class="cartItems">
                     <div class="cart_content" *ngFor="let item of cartItems">
                         <div class="row " >
+
                         <div class="col-md-5">
                             <div class="cart_img position-relative">
                                 <img [src]="item.product.cover_image.path" class="img-thumbnail w-100"  alt="">

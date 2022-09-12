@@ -14,16 +14,20 @@ export class CartService {
   
   cartData:any = new BehaviorSubject([])
   cartItemsLength:any = new BehaviorSubject(0)
-  cartTotalValue:any = new BehaviorSubject(0)
+  cartTotalValue:any = new BehaviorSubject('0.00')
   
+  curUserRole:any = ''
 
   constructor(private _HttpClient:HttpClient, private _AuthService:AuthService)
   {
     this._AuthService.headers.subscribe((resp:any)=>
     {
       this.headers= resp
-      console.log(this.headers);
-      
+    }) 
+
+    this._AuthService.userRole.subscribe((currUser:any)=>
+    {
+      this.curUserRole = currUser
     }) 
     this.showCartData()
   }
@@ -36,7 +40,7 @@ export class CartService {
     
     showCartData()
     {
-      if(this._AuthService.currentUserData.getValue())
+      if(this._AuthService.currentUserData.getValue() && this.curUserRole == 'customer' )
       {        
         this.getCartData().subscribe((resp)=>
         {

@@ -30,8 +30,10 @@ export class NavbarComponent implements OnInit {
 
   constructor(private _AuthService:AuthService, public _Router:Router, private _CartService:CartService, private _ToastrService:ToastrService)
   {
-    this.userRole = this._AuthService.userRole;
-    console.log(this.userRole);
+    this._AuthService.userRole.subscribe((currUser:any)=>
+    {
+      this.userRole = currUser;
+    });
     
     this._AuthService.currentUserData.subscribe((currentData:any)=>
     {      
@@ -53,6 +55,7 @@ export class NavbarComponent implements OnInit {
       }
     })
 
+
     this.showCartData()
   }
 
@@ -61,19 +64,16 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
     
     this._AuthService.currentUserData.next(null)
-
-
+    this._AuthService.userRole.next(null)
 
     this._CartService.cartData.next(null) // clear cart data
     this._CartService.cartTotalValue.next('00.0') 
     this._CartService.cartItemsLength.next(null) 
-
-
-
     
     this.isLogin = false;
     this._Router.navigate(['/login']);
   }
+  
   showCartData()
   {
     this._CartService.cartData.subscribe((resp:any)=>
@@ -143,25 +143,27 @@ export class NavbarComponent implements OnInit {
     $(".sideBar").css("right", '-320px');
     $(".sideBar_lightbox").css("display", 'none');
   }
+
+  openMenu()
+  {
+    var menu:any = document.getElementById("menu");
+    if( $("#menu").css("left") =="500px" ) //when sidebar inside
+    {
+        menu.style.left = "180px"  ;  
+        $('#menu-bar').addClass('fas fa-times');
+    }
+    else //when sidebar outside
+    {
+      menu.style.left = "500px"    ;  
+      $('#menu-bar').removeClass('fas fa-times');
+      $('#menu-bar').addClass('fas fa-bars');
+    }
+  }
   
   ngOnInit(): void {
-    $('#menu-bar').click(function()
-    {
-      var menu:any = document.getElementById("menu");
-      if( $("#menu").css("left") =="500px" ) //when sidebar inside
-      {
-          menu.style.left = "180px"  ;  
-          $('#menu-bar').addClass('fas fa-times');
-      }
-      else //when sidebar outside
-      {
-        menu.style.left = "500px"    ;  
-        $('#menu-bar').removeClass('fas fa-times');
-        $('#menu-bar').addClass('fas fa-bars');
-      }
-    });
 
 
+    
     $('.icon').click(function()
     {
       console.log('hello');

@@ -14,7 +14,12 @@ export class ProductsService {
 
   constructor(private _HttpClient:HttpClient, private _AuthService:AuthService)
   {
-    this.headers = this._AuthService.headers;
+    this._AuthService.headers.subscribe((resp:any)=> {
+      this.headers = resp
+      // console.log(resp);
+      
+    });
+
     
   }
 

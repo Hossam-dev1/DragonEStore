@@ -33,7 +33,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(private _ProductsService:ProductsService, private modalService: NgbModal, private _AuthService:AuthService) 
   {
-    this.userRole = this._AuthService.userRole;
+    this._AuthService.userRole.subscribe((currUser:any)=>
+    {
+      this.userRole = currUser;
+    });
   
       
       this.getCurrentCats();
@@ -60,7 +63,7 @@ export class DashboardComponent implements OnInit {
 
   getFile(event:any)
   {
-    let fileLength = event.target.files.length;
+    let fileLength = event.target.files?.length;
     if (fileLength > 0)
     {      
       this.fileImg = event.target.files[0];
@@ -104,7 +107,7 @@ export class DashboardComponent implements OnInit {
 
   getUpdatedFile(event:any)
   {
-    let fileLength = event.target.files.length;
+    let fileLength = event.target.files?.length;
     if (fileLength > 0)
     {      
       this.fileImg = event.target.files[0];
@@ -119,7 +122,7 @@ export class DashboardComponent implements OnInit {
     console.log(this.catsData);
     
     
-    for (let i = 0; i < this.catsData.length; i++) // Set Input old Values
+    for (let i = 0; i < this.catsData?.length; i++) // Set Input old Values
     {
       if(this.catsData[i].id == this.updatedCat.id)
       {
@@ -194,30 +197,38 @@ export class DashboardComponent implements OnInit {
       (resp)=>
       {
         this.productsData = resp.data.filter((product:any)=> product.category !== null )
+        // console.log(resp);
+        
       })
   }
 
   getProFile(event:any)
   {
-    let fileLength = event.target.files.length;
+    let fileLength = event.target.files?.length;
     if (fileLength > 0)
     {      
       this.fileImg = event.target.files[0];
       this.productsForm.patchValue({cover_image:this.fileImg});
     }
+    // console.log(fileLength);
+    
   }
   // array of imagesssss
   getAllProFiles(event:any)
   {
-    let fileLength = event.target.files.length;
+    let fileLength = event.target.files?.length;
     if (fileLength > 0)
     {      
       let productFiles = event.target.files;
       // console.log(event.target.files);
       for (let i = 0; i < fileLength; i++) {
       this.productsForm.controls.images.value.push(productFiles[i]);
+
       this.imgsArray.push(productFiles[i])
+      
       }
+    // console.log(fileLength);
+
     }
   }
 
@@ -234,7 +245,7 @@ export class DashboardComponent implements OnInit {
     formData.append('discount', productsForm.value.discount);
     formData.append('stock', productsForm.value.stock);
     formData.append('cover_image', productsForm.value.cover_image, this.fileImg.name);
-    // console.log(this.imgsArray);
+    console.log(this.imgsArray);
     
     for (let img of this.imgsArray) {
       formData.append('images[]', img, img.name);
@@ -267,8 +278,8 @@ export class DashboardComponent implements OnInit {
   showProduct(proId:number, show_product:any)
   {
     this.open(show_product);
-      this.currentProduct = this.productsData.find((product)=> product.id == proId );
-      console.log(this.currentProduct);
+      this.currentProduct = this.productsData.find((product:any)=> product.id == proId );
+      console.log(this.productsData);
   
   }
 
@@ -280,7 +291,7 @@ export class DashboardComponent implements OnInit {
     this.productsForm.reset();
     this.currentProduct = this.productsData.find((product)=> product.id == proId );
     
-    for (let i = 0; i < this.productsData.length; i++) // Set Input old Values
+    for (let i = 0; i < this.productsData?.length; i++) // Set Input old Values
     {
       if(this.productsData[i].id == this.currentProduct.id)
       {
@@ -364,12 +375,15 @@ export class DashboardComponent implements OnInit {
       if(this.userRole == 'seller')
       {
         this.allSellerItems= resp.data;
+        this.productsData= resp.data;
+        // console.log(resp.data);
         return;
       }
-      let approvedProducts =  resp.data.filter((product:any) => product.approval_status == 'pending');
+      this.unAppProducts = resp.data.filter((product:any) => product.approval_status == 'pending');
 
-      this.unAppProducts = approvedProducts;
-      console.log(resp.data);
+      console.log(this.unAppProducts);
+    },
+    (errors)=>{console.log(errors);
     })
   }
 
@@ -407,7 +421,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 
-  
+  //  this.getUnAppProducts()
   }
 
 }
